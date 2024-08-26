@@ -3,10 +3,14 @@ import { useEffect, useState } from 'react';
 import Sidebar from '../components/Dashboard/Sidebar';
 import PageTitle from '../components/PageTitle/PageTitle';
 import { motion } from "framer-motion";
+import { useAppSelector } from '../redux/hooks';
+import { useCurrentUser } from '../redux/features/authSlice';
 
 const DashboardLayout = () => {
   const location = useLocation();
   const [isOutletEmpty, setIsOutletEmpty] = useState(true);
+
+  const user = useAppSelector(useCurrentUser)
 
   useEffect(() => {
     setIsOutletEmpty(location.pathname === '/dashboard');
@@ -17,17 +21,14 @@ const DashboardLayout = () => {
       <Sidebar />
       <div className='flex-1 flex flex-col justify-center items-center md:ml-24 bg-gray-100'>
         {isOutletEmpty && (
-          <div className='absolute top-12 text-center'>
-            <PageTitle heading='Welcome to ClickCraft' subHeading='Now You are able to Manage & add products' />
-            <motion.div
-              className='pt-10'
-              initial={{ y: 0 }}
+          <motion.div
+          initial={{ y: 0 }}
               animate={{ y: [0, -10, 0] }}
               transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.2 }}
-            >
-              <h1 className='text-4xl text-gray-800 font-semibold'>Stay Tuned with ClickCraft & enhance your tech experience...</h1>
-            </motion.div>
-          </div>
+          className='absolute top-12 text-center bg-gray-300 rounded-md p-4'>
+            <PageTitle heading={`Welcome to BookSpace ${user?.name}`} subHeading={`Your are ${user?.role} Now & Enjoy the facilities now`} />
+            
+          </motion.div>
         )}
         <div className='p-6 w-full'>
           <Outlet />

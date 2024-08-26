@@ -1,15 +1,18 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import {  FaHome } from 'react-icons/fa';
-import { IoBagAddSharp } from "react-icons/io5";
+import { FaHome } from 'react-icons/fa';
+import { IoBagAddSharp } from 'react-icons/io5';
 import { AiOutlineBars } from 'react-icons/ai';
 import { MdManageAccounts } from 'react-icons/md';
 import { motion, AnimatePresence } from 'framer-motion';
 import Container from '../Container/Container';
+import { useAppSelector } from '../../redux/hooks';
+import { useCurrentUser } from '../../redux/features/authSlice';
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const user = useAppSelector(useCurrentUser);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -23,8 +26,7 @@ const Sidebar = () => {
     <Container>
       {/* Small Screen Navbar */}
       <div className='bg-gray-200 text-gray-600 flex justify-between md:hidden'>
-        <div className='block cursor-pointer p-4 font-bold '>
-          
+        <div className='block cursor-pointer p-4 font-bold'>
           <Link to='/' className='flex-grow flex justify-center'>
             <motion.img
               initial={{ y: 0 }}
@@ -78,77 +80,87 @@ const Sidebar = () => {
             <div>
               {/* Branding & Profile Info */}
               <Link to='/' className='flex-grow flex justify-center'>
-              <motion.img
-              initial={{ y: 0 }}
-              animate={{ y: [0, -10, 0] }}
-              transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut', delay: 0.5 }}
-              src='/bookingcom.svg'
-              height={28}
-              width={28}
-              alt=''
-            />
-            <h2 className='text-3xl font-bold text-black'>
-              <span className='text-gray-600'>Book</span>Space
-            </h2>
+                <motion.img
+                  initial={{ y: 0 }}
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut', delay: 0.5 }}
+                  src='/bookingcom.svg'
+                  height={28}
+                  width={28}
+                  alt=''
+                />
+                <h2 className='text-3xl font-bold text-black'>
+                  <span className='text-gray-600'>Book</span>Space
+                </h2>
               </Link>
-              
 
               {/* Nav Items */}
               <div className='flex flex-col justify-between flex-1 mt-6'>
                 <nav>
-                  <>
-                    {/* Menu Links start */}
-
-                    {/* rooms */}
-                    <NavLink
-                      to='/dashboard/add-room'
-                      className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? "active1" : "default"}`}
-                      onClick={closeSidebar}
-                    >
-                      <IoBagAddSharp className='w-6 h-6' />
-                      <span className='mx-4 font-medium'>Add Room</span>
-                    </NavLink>
-                    <NavLink
-                      to='/dashboard/manage-rooms'
-                      className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? "active1" : "default"}`}
-                      onClick={closeSidebar}
-                    >
-                      <MdManageAccounts className='w-6 h-6' />
-                      <span className='mx-4 font-medium'>Manage Rooms</span>
-                    </NavLink>
-
-
-                    {/* slots */}
-
-                    <NavLink
-                      to='/dashboard/add-slot'
-                      className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? "active1" : "default"}`}
-                      onClick={closeSidebar}
-                    >
-                      <IoBagAddSharp className='w-6 h-6' />
-                      <span className='mx-4 font-medium'>Add Slot</span>
-                    </NavLink>
-                    <NavLink
-                      to='/dashboard/manage-slots'
-                      className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? "active1" : "default"}`}
-                      onClick={closeSidebar}
-                    >
-                      <MdManageAccounts className='w-6 h-6' />
-                      <span className='mx-4 font-medium'>Manage Slots</span>
-                    </NavLink>
-
-                    {/* Bookings */}
-
-                    
-                    <NavLink
-                      to='/dashboard/manage-bookings'
-                      className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? "active1" : "default"}`}
-                      onClick={closeSidebar}
-                    >
-                      <MdManageAccounts className='w-6 h-6' />
-                      <span className='mx-4 font-medium'>Manage Bookings</span>
-                    </NavLink>
-                  </>
+                  {/* Menu Links start */}
+                  {user?.role === 'admin' ? (
+                    <>
+                      <NavLink
+                        to='/dashboard/add-room'
+                        className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? 'active1' : 'default'}`}
+                        onClick={closeSidebar}
+                      >
+                        <IoBagAddSharp className='w-6 h-6' />
+                        <span className='mx-4 font-medium'>Add Room</span>
+                      </NavLink>
+                      <NavLink
+                        to='/dashboard/manage-rooms'
+                        className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? 'active1' : 'default'}`}
+                        onClick={closeSidebar}
+                      >
+                        <MdManageAccounts className='w-6 h-6' />
+                        <span className='mx-4 font-medium'>Manage Rooms</span>
+                      </NavLink>
+                      <NavLink
+                        to='/dashboard/add-slot'
+                        className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? 'active1' : 'default'}`}
+                        onClick={closeSidebar}
+                      >
+                        <IoBagAddSharp className='w-6 h-6' />
+                        <span className='mx-4 font-medium'>Add Slot</span>
+                      </NavLink>
+                      <NavLink
+                        to='/dashboard/manage-slots'
+                        className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? 'active1' : 'default'}`}
+                        onClick={closeSidebar}
+                      >
+                        <MdManageAccounts className='w-6 h-6' />
+                        <span className='mx-4 font-medium'>Manage Slots</span>
+                      </NavLink>
+                      <NavLink
+                        to='/dashboard/manage-bookings'
+                        className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? 'active1' : 'default'}`}
+                        onClick={closeSidebar}
+                      >
+                        <MdManageAccounts className='w-6 h-6' />
+                        <span className='mx-4 font-medium'>Manage Bookings</span>
+                      </NavLink>
+                      <NavLink
+                        to='/dashboard/manage-users'
+                        className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? 'active1' : 'default'}`}
+                        onClick={closeSidebar}
+                      >
+                        <MdManageAccounts className='w-6 h-6' />
+                        <span className='mx-4 font-medium'>Manage Users</span>
+                      </NavLink>
+                    </>
+                  ) : user?.role === 'user' ? (
+                    <>
+                      <NavLink
+                        to='/dashboard/my-bookings'
+                        className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? 'active1' : 'default'}`}
+                        onClick={closeSidebar}
+                      >
+                        <MdManageAccounts className='w-6 h-6' />
+                        <span className='mx-4 font-medium'>My Bookings</span>
+                      </NavLink>
+                    </>
+                  ) : null}
                 </nav>
               </div>
             </div>
@@ -172,60 +184,82 @@ const Sidebar = () => {
         <div>
           {/* Branding & Profile Info */}
           <Link to='/' className='flex-grow flex justify-center'>
-            <h2 className='text-3xl font-bold text-gray-400 text-center'>
-              <span className='text-gray-300'>Click</span>Craft
+          <motion.img
+              initial={{ y: 0 }}
+              animate={{ y: [0, -10, 0] }}
+              transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut', delay: 0.5 }}
+              src='/bookingcom.svg'
+              height={28}
+              width={28}
+              alt=''
+            />
+            <h2 className='text-3xl font-bold text-black'>
+              <span className='text-gray-600'>Book</span>Space
             </h2>
           </Link>
+
+         
 
           {/* Nav Items */}
           <div className='flex flex-col justify-between flex-1 mt-6'>
             <nav>
-              <>
-                {/* Menu Links start */}
-
-                {/* rooms */}
-                <NavLink
-                  to='/dashboard/add-room'
-                  className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? "active1" : "default"}`}
-                >
-                  <IoBagAddSharp className='w-6 h-6' />
-                  <span className='mx-4 font-medium'>Add Room</span>
-                </NavLink>
-                <NavLink
-                  to='/dashboard/manage-rooms'
-                  className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? "active1" : "default"}`}
-                >
-                  <MdManageAccounts className='w-6 h-6' />
-                  <span className='mx-4 font-medium'>Manage Rooms</span>
-                </NavLink>
-
-                {/* slots */}
-
-                <NavLink
-                  to='/dashboard/add-slot'
-                  className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? "active1" : "default"}`}
-                >
-                  <IoBagAddSharp className='w-6 h-6' />
-                  <span className='mx-4 font-medium'>Add Slots</span>
-                </NavLink>
-                <NavLink
-                  to='/dashboard/manage-slots'
-                  className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? "active1" : "default"}`}
-                >
-                  <MdManageAccounts className='w-6 h-6' />
-                  <span className='mx-4 font-medium'>Manage Slots</span>
-                </NavLink>
-
-                {/* Bookings */}
-
-                <NavLink
-                  to='/dashboard/manage-bookings'
-                  className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? "active1" : "default"}`}
-                >
-                  <MdManageAccounts className='w-6 h-6' />
-                  <span className='mx-4 font-medium'>Manage Bookings</span>
-                </NavLink>
-              </>
+              {/* Menu Links start */}
+              {user?.role === 'admin' ? (
+                <>
+                  <NavLink
+                    to='/dashboard/add-room'
+                    className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? 'active1' : 'default'}`}
+                  >
+                    <IoBagAddSharp className='w-6 h-6' />
+                    <span className='mx-4 font-medium'>Add Room</span>
+                  </NavLink>
+                  <NavLink
+                    to='/dashboard/manage-rooms'
+                    className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? 'active1' : 'default'}`}
+                  >
+                    <MdManageAccounts className='w-6 h-6' />
+                    <span className='mx-4 font-medium'>Manage Rooms</span>
+                  </NavLink>
+                  <NavLink
+                    to='/dashboard/add-slot'
+                    className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? 'active1' : 'default'}`}
+                  >
+                    <IoBagAddSharp className='w-6 h-6' />
+                    <span className='mx-4 font-medium'>Add Slots</span>
+                  </NavLink>
+                  <NavLink
+                    to='/dashboard/manage-slots'
+                    className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? 'active1' : 'default'}`}
+                  >
+                    <MdManageAccounts className='w-6 h-6' />
+                    <span className='mx-4 font-medium'>Manage Slots</span>
+                  </NavLink>
+                  <NavLink
+                    to='/dashboard/manage-bookings'
+                    className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? 'active1' : 'default'}`}
+                  >
+                    <MdManageAccounts className='w-6 h-6' />
+                    <span className='mx-4 font-medium'>Manage Bookings</span>
+                  </NavLink>
+                  <NavLink
+                    to='/dashboard/manage-users'
+                    className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? 'active1' : 'default'}`}
+                  >
+                    <MdManageAccounts className='w-6 h-6' />
+                    <span className='mx-4 font-medium'>Manage Users</span>
+                  </NavLink>
+                </>
+              ) : user?.role === 'user' ? (
+                <>
+                  <NavLink
+                    to='/dashboard/my-bookings'
+                    className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? 'active1' : 'default'}`}
+                  >
+                    <MdManageAccounts className='w-6 h-6' />
+                    <span className='mx-4 font-medium'>My Bookings</span>
+                  </NavLink>
+                </>
+              ) : null}
             </nav>
           </div>
         </div>

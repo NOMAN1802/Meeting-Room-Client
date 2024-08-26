@@ -6,6 +6,14 @@ import ContactUs from "../pages/ContactUs/ContactUs";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import Home from "../pages/Home/Home";
 import Register from "../pages/Register/Register";
+import DashboardLayout from "../layout/DashboardLayout";
+import AddRoom from "../pages/Dashboard/AddRoom/AddRoom";
+import ManageRooms from "../pages/Dashboard/ManageRooms/ManageRooms";
+import AddSlot from "../pages/Dashboard/AddSlot/AddSlot";
+import ManageSlots from "../pages/Dashboard/ManageSlots/ManageSlots";
+import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
+import MyBookings from "../pages/Dashboard/MyBookings/MyBookings";
+import ManageBookings from "../pages/Dashboard/ManageBookings/ManageBookings";
 
 
 const router = createBrowserRouter([
@@ -38,7 +46,48 @@ const router = createBrowserRouter([
                 element:<Register/>
               },
             ]
-    }   
+    },
+    
+    {
+      path: "/dashboard",
+      element: <DashboardLayout/>,
+      children: [
+      
+        
+        {
+          path:'add-room',
+          element: <AddRoom/>
+      },
+        {
+          path:'manage-rooms',
+          element: <ManageRooms/>
+      },
+      {
+        path:'add-slot',
+        element: <AddSlot/>
+    },
+      {
+        path:'manage-slots',
+        element: <ManageSlots/>
+    },
+
+    {
+      path:'manage-users',
+      element: <ManageUsers/>
+  },
+    {
+      path:'manage-bookings',
+      element: <ManageBookings/>
+  },
+    {
+      path:'my-bookings',
+      element: <MyBookings/>
+  },
+        
+        
+      ],
+  
+  },
 ])
 
 

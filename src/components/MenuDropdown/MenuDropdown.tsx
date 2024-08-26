@@ -1,6 +1,6 @@
 import React from 'react';
-import { Menu, Dropdown, Button } from 'antd';
-import { DownOutlined, UserOutlined, LogoutOutlined, DashboardOutlined } from '@ant-design/icons';
+import { Menu, Dropdown } from 'antd';
+import {  LogoutOutlined, DashboardOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import ProfImg from '../../assets/images/admin.png';
 import { useCurrentUser } from '../../redux/features/authSlice';
@@ -18,7 +18,7 @@ const MenuDropdown: React.FC = () => {
   const menu = (
     <Menu>
       <Menu.Item key="1" icon={<DashboardOutlined />}>
-        <Link to={user?.role === 'admin' ? '/dashboard/adminDashboard' : '/dashboard/myDashboard'}>
+        <Link to={user?.role === 'admin' ? '/dashboard' : '/dashboard/my-bookings'}>
           {user?.role === 'admin' ? 'Dashboard' : 'My Bookings'}
         </Link>
       </Menu.Item>
