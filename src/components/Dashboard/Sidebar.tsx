@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Container from '../Container/Container';
 import { useAppSelector } from '../../redux/hooks';
 import { useCurrentUser } from '../../redux/features/authSlice';
+import ProfImg from "../../assets/images/admin.png";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -79,7 +80,7 @@ const Sidebar = () => {
           >
             <div>
               {/* Branding & Profile Info */}
-              <Link to='/' className='flex-grow flex justify-center'>
+              <Link to='/' className='flex-grow flex justify-center items-center flex-col'>
                 <motion.img
                   initial={{ y: 0 }}
                   animate={{ y: [0, -10, 0] }}
@@ -92,7 +93,17 @@ const Sidebar = () => {
                 <h2 className='text-3xl font-bold text-black'>
                   <span className='text-gray-600'>Book</span>Space
                 </h2>
+               
               </Link>
+               {/* Profile Image & Name */}
+               <div className='flex flex-col items-center mt-4'>
+                  <img
+                    src={ProfImg}
+                    alt='Profile'
+                    className='w-16 h-16 rounded-full object-cover'
+                  />
+                  <p className='mt-2 text-lg font-medium text-gray-700'>{user?.name}</p>
+                </div>
 
               {/* Nav Items */}
               <div className='flex flex-col justify-between flex-1 mt-6'>
@@ -183,8 +194,8 @@ const Sidebar = () => {
       <div className='hidden md:flex md:fixed md:flex-col md:justify-between md:overflow-x-hidden md:bg-gray-200 md:w-64 md:space-y-6 md:px-2 md:py-4 md:inset-y-0 md:left-0'>
         <div>
           {/* Branding & Profile Info */}
-          <Link to='/' className='flex-grow flex justify-center'>
-          <motion.img
+          <Link to='/' className='flex-grow flex justify-center items-center flex-col'>
+            <motion.img
               initial={{ y: 0 }}
               animate={{ y: [0, -10, 0] }}
               transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut', delay: 0.5 }}
@@ -196,9 +207,18 @@ const Sidebar = () => {
             <h2 className='text-3xl font-bold text-black'>
               <span className='text-gray-600'>Book</span>Space
             </h2>
+            
+            
           </Link>
-
-         
+          {/* Profile Image & Name */}
+          <div className='flex flex-col items-center mt-4'>
+              <img
+                src={ProfImg}
+                alt='Profile'
+                className='w-16 h-16 rounded-full object-cover'
+              />
+              <p className='mt-2 text-lg font-medium text-gray-700'>{user?.name}</p>
+            </div>
 
           {/* Nav Items */}
           <div className='flex flex-col justify-between flex-1 mt-6'>
@@ -225,7 +245,7 @@ const Sidebar = () => {
                     className={({ isActive }) => `flex items-center px-4 py-2 mt-5 text-gray-600 ${isActive ? 'active1' : 'default'}`}
                   >
                     <IoBagAddSharp className='w-6 h-6' />
-                    <span className='mx-4 font-medium'>Add Slots</span>
+                    <span className='mx-4 font-medium'>Add Slot</span>
                   </NavLink>
                   <NavLink
                     to='/dashboard/manage-slots'
