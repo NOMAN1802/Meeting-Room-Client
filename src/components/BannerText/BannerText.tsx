@@ -11,12 +11,12 @@ const BannerText = () => {
           transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay:  0.5 }} 
     >
         <div>
-            <p className="text-gray-400 rounded-md p-2   md:text-4xl text-center my-4">
-                Enhance your tech experience
+            <p className="text-gray-300 rounded-md p-2   md:text-4xl text-center my-4">
+            Book Your Ideal Meeting Room with Ease
                 
             </p>
-            <p className="text-gray-400 rounded-md p-1 md:text-md text-center my-4">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates labore autem, magnam pariatur sapiente enim facilis alias? Illo, voluptate odit.
+            <p className="text-gray-300 rounded-md p-1 md:text-lg text-center my-4">
+            Efficient, hassle-free room booking for all your meeting needs.
             </p>
         </div>
         <Link to='/meeting-rooms'>
