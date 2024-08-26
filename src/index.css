@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border;
+    padding: 0;
+    margin: 0;
+  }
+
+  body {
+    @apply bg-gray-100;
+    
+      /* font-family:  Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
+      font-family:  Fira Code, Operator Mono;
+  }
+}
+
+@layer components {
+  .active {
+    @apply tracking-wide transition-colors duration-300 cursor-pointer mb-2 lg:mb-0 text-base font-medium;
+  }
+  
+  .active1 {
+    @apply  transition border-b-2 border-gray-600 cursor-pointer mb-2 lg:mb-0 text-base tracking-wide font-medium;
+  }
+  
+  .default {
+    @apply  transition   hover:border-gray-600 cursor-pointer mb-2 lg:mb-0 text-base font-medium;
+  }
+}

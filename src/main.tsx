@@ -12,6 +12,6 @@ createRoot(document.getElementById('root')!).render(
     <Provider store={store}>
     <Toaster position="top-center" />
     <RouterProvider router={router}/>
-    </Provider>,
-  </StrictMode>,
+    </Provider>
+  </StrictMode>
 )
