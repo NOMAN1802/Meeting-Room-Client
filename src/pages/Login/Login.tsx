@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
@@ -11,8 +12,8 @@ import { useAppDispatch } from "../../redux/hooks";
 import { useLoginMutation } from "../../redux/api/auth/authApi";
 import { setUser, TUser } from "../../redux/features/authSlice";
 import { toast } from "sonner";
+// import jwtDecode from "jwt-decode";
 import { verifyToken } from "../../utils/verifyToken";
-
 
 type FormValues = {
   email: string;
@@ -30,19 +31,49 @@ const Login: React.FC = () => {
 
   const [login] = useLoginMutation();
 
-  const onSubmit = async (data: FieldValues) => {
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const toastId = toast.loading("Logging in...");
-
+  
     try {
+      // Attempt to login and unwrap the response
       const res = await login(data).unwrap();
-      const user = jwtDecode(res.data.accessToken) as any;
-      dispatch(setUser({ user, token: res.data.accessToken }));
-      toast.success("Logged in successfully", { id: toastId });
-      navigate(from, { replace: true });
+      const { success, token, data: userData } = res;
+  
+      if (success) {
+        // Verify the token
+        const decodedToken = verifyToken(token);
+  
+        // Ensure the token is valid and contains user information
+        if (decodedToken) {
+          // Extract user information
+          const user = {
+            _id: userData._id,
+            name: userData.name,
+            email: userData.email,
+            phone: userData.phone,
+            role: userData.role,
+            address: userData.address,
+           
+          };
+  
+          // Dispatch action to set user and token in Redux store
+          dispatch(setUser({ user, token }));
+          toast.success("Logged in successfully", { id: toastId });
+          navigate(from, { replace: true });
+        } else {
+          // Handle invalid token scenario
+          toast.error("Invalid token received", { id: toastId });
+        }
+      } else {
+        toast.error("Login failed", { id: toastId });
+      }
     } catch (err) {
       toast.error("Something went wrong", { id: toastId });
     }
   };
+  
+
+
 
   const handleViewPassword = () => {
     setViewPassword(!viewPassword);

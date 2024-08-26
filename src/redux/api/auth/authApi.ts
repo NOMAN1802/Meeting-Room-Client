@@ -1,6 +1,5 @@
 import { baseApi } from "../baseApi";
 
-
 type LoginRequest = {
   email: string;
   password: string;
@@ -15,27 +14,34 @@ type RegisterRequest = {
 };
 
 type AuthResponse = {
-  data: {
+    success: boolean;
+    statusCode: number;
+    message: string;
     token: string;
+    data: {
+      _id: string;
+      name: string;
+      email: string;
+      phone: string;
+      role: string;
+      address: string;
+      
+    };
   };
-};
-
 
 
 const authApi = baseApi.injectEndpoints({
-
-    
   endpoints: (builder) => ({
     login: builder.mutation<AuthResponse, LoginRequest>({
       query: (credentials) => ({
-        url: "login",
+        url: "/auth/login",
         method: "POST",
         body: credentials,
       }),
     }),
     register: builder.mutation<AuthResponse, RegisterRequest>({
       query: (newUser) => ({
-        url: "register",
+        url: "/auth/register",
         method: "POST",
         body: newUser,
       }),
