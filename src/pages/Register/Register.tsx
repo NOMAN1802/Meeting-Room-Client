@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { FaMap, FaMobile, FaPersonBooth, FaUser } from "react-icons/fa";
 import { AiOutlineLock } from "react-icons/ai";
@@ -8,33 +10,35 @@ import Container from "../../components/Container/Container";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { useRegisterMutation } from "../../redux/api/auth/authApi";
 import { useAppDispatch } from "../../redux/hooks";
-import { setUser } from "../../redux/features/authSlice";
 import { toast } from "sonner";
+
+type FormValues = {
+  name: string;
+  email: string;
+  password: string;
+  phone: string;
+  address: string;
+};
 
 const Register: React.FC = () => {
   const [viewPassword, setViewPassword] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.pathname || "/";
-  const dispatch = useAppDispatch();
 
-  const [register, { data }] = useRegisterMutation();
+  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
+  const [registerUser] = useRegisterMutation();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    const toastId = toast.loading("Registering...");
 
-    const userInfo = {
-      // Your form values go here
-      // name, email, password, phone, address
-    };
-
-    const { data } = await register(userInfo);
-    const { token } = data?.data;
-    const user = jwtDecode(token) as TUser;
-
-    dispatch(setUser({ user, token }));
-    toast.success("User registered successfully");
-    navigate(from, { replace: true });
+    try {
+      await registerUser(data).unwrap();
+      toast.success("User registered successfully", { id: toastId });
+      navigate(from, { replace: true });
+    } catch (error) {
+      toast.error("Registration failed", { id: toastId });
+    }
   };
 
   const handleViewPassword = () => {
@@ -50,7 +54,7 @@ const Register: React.FC = () => {
           animate={{ y: [0, -10, 0] }}
           transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.5 }}
           className="space-y-4 max-w-md w-full"
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex flex-col items-start relative">
             <label className="text-sm mb-2" htmlFor="name">Name</label>
@@ -59,9 +63,10 @@ const Register: React.FC = () => {
               <input
                 type="text"
                 id="name"
+                {...register("name", { required: "Name is required" })}
                 className="w-96 rounded-md pl-10 py-2 border border-gray-300"
-                required
               />
+              {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>}
             </div>
           </div>
 
@@ -72,9 +77,10 @@ const Register: React.FC = () => {
               <input
                 type="email"
                 id="email"
+                {...register("email", { required: "Email is required" })}
                 className="w-96 rounded-md pl-10 py-2 border border-gray-300"
-                required
               />
+              {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
             </div>
           </div>
 
@@ -85,9 +91,10 @@ const Register: React.FC = () => {
               <input
                 type="text"
                 id="phone"
+                {...register("phone", { required: "Phone is required" })}
                 className="w-96 rounded-md pl-10 py-2 border border-gray-300"
-                required
               />
+              {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
             </div>
           </div>
 
@@ -98,9 +105,10 @@ const Register: React.FC = () => {
               <input
                 type="text"
                 id="address"
+                {...register("address", { required: "Address is required" })}
                 className="w-96 rounded-md pl-10 py-2 border border-gray-300"
-                required
               />
+              {errors.address && <p className="text-red-500 text-xs mt-1">{errors.address.message}</p>}
             </div>
           </div>
 
@@ -110,6 +118,7 @@ const Register: React.FC = () => {
               <input
                 type={viewPassword ? "text" : "password"}
                 id="password"
+                {...register("password", { required: "Password is required" })}
                 className="w-96 rounded-md pl-10 pr-12 py-2 border border-gray-300"
               />
               <div
@@ -119,6 +128,7 @@ const Register: React.FC = () => {
                 {viewPassword ? <BsEyeSlash /> : <BsEye />}
               </div>
               <AiOutlineLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
             </div>
           </div>
 

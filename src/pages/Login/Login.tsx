@@ -10,9 +10,8 @@ import Container from "../../components/Container/Container";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { useAppDispatch } from "../../redux/hooks";
 import { useLoginMutation } from "../../redux/api/auth/authApi";
-import { setUser, TUser } from "../../redux/features/authSlice";
+import { setUser } from "../../redux/features/authSlice";
 import { toast } from "sonner";
-// import jwtDecode from "jwt-decode";
 import { verifyToken } from "../../utils/verifyToken";
 
 type FormValues = {
@@ -35,17 +34,15 @@ const Login: React.FC = () => {
     const toastId = toast.loading("Logging in...");
   
     try {
-      // Attempt to login and unwrap the response
+
       const res = await login(data).unwrap();
       const { success, token, data: userData } = res;
   
       if (success) {
-        // Verify the token
-        const decodedToken = verifyToken(token);
   
-        // Ensure the token is valid and contains user information
+        const decodedToken = verifyToken(token);
         if (decodedToken) {
-          // Extract user information
+          
           const user = {
             _id: userData._id,
             name: userData.name,
@@ -56,12 +53,12 @@ const Login: React.FC = () => {
            
           };
   
-          // Dispatch action to set user and token in Redux store
+         
           dispatch(setUser({ user, token }));
           toast.success("Logged in successfully", { id: toastId });
           navigate(from, { replace: true });
         } else {
-          // Handle invalid token scenario
+          
           toast.error("Invalid token received", { id: toastId });
         }
       } else {
