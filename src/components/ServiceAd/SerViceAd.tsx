@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import { motion } from "framer-motion";
 
-// Define a type for the ad items
+
 interface Ad {
   id: number;
   subject_image: string;
@@ -30,7 +30,7 @@ const SerViceAd = () => {
               initial={{ y: 0 }}
                   animate={{ y: [0, -10, 0] }}
                   transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: index * 0.2 }}
-               key={ad.id} className='bg-gray-200 bg-gradient-to-r from-gray-300 to-gray-400 shadow-2xl flex gap-2 items-center p-4 rounded-xl hover:bg-gray-800 hover:text-white'>
+               key={ad.id} className='bg-gray-200 shadow-2xl flex gap-2 items-center p-4 rounded-xl hover:bg-gray-700 hover:text-white'>
                 <img
                   
                   className='w-20 rounded-md'
