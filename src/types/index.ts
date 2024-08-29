@@ -35,6 +35,7 @@ export type FormValues = {
     pricePerSlot: number; 
     amenities: string[];  
     isDeleted?: boolean; 
+    isBooked?: boolean;
 }
 
 export type TSlot = {

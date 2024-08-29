@@ -8,7 +8,7 @@ interface BreadcrumbItem {
 
 export const generateBreadcrumbs = (items: BreadcrumbItem[]) => {
   return (
-    <div className="flex items-center">
+    <div className="flex items-center my-8">
       <ol className="flex w-full items-center overflow-hidden">
         {items.map((item, index) => (
           <React.Fragment key={index}>

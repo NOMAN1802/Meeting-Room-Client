@@ -16,6 +16,7 @@ import MyBookings from "../pages/Dashboard/MyBookings/MyBookings";
 import ManageBookings from "../pages/Dashboard/ManageBookings/ManageBookings";
 import RoomDetails from "../pages/RoomDetails/RoomDetails";
 import Booking from "../pages/Booking/Booking";
+import Checkout from "../pages/Checkout/Checkout";
 
 
 const router = createBrowserRouter([
@@ -48,6 +49,11 @@ const router = createBrowserRouter([
               path:'/booking/:id',
               element:<Booking/>
             },
+            {
+              path:'/checkout',
+              element:<Checkout/>
+            },
+
             {
                 path:'/about-us',
                 element:<AboutUs/>

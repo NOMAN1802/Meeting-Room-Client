@@ -62,7 +62,7 @@ const Booking = () => {
   const breadcrumbItems = [
     { label: "Home", path: "/" },
     { label: "Booking", path: `/booking/${roomId}` },
-    { label: roomId?.name || "Loading..." }
+    { label:  "Loading..." }
   ];
 
   if (isLoading) {
@@ -132,32 +132,32 @@ const Booking = () => {
 
      <h2 className="text-xl font-semibold mt-6 mb-4">Your Details</h2>
     {userData ? (
-  <motion.div 
-  className="bg-gray-100 p-4 rounded-lg"
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ duration: 0.5, delay: 0.4 }}
-  >
-  <p className="flex items-center mb-2">
-    <FaUser className="mr-2 text-gray-600" /> {/* User Icon */}
+    <motion.div 
+   className="bg-gray-100 p-4 rounded-lg"
+   initial={{ opacity: 0 }}
+   animate={{ opacity: 1 }}
+   transition={{ duration: 0.5, delay: 0.4 }}
+   >
+   <p className="flex items-center mb-2">
+    <FaUser className="mr-2 text-gray-600" /> 
     <strong className="mr-1">Name:</strong> {userData.data?.name}
-  </p>
-  <p className="flex items-center mb-2">
-    <FaEnvelope className="mr-2 text-gray-600" /> {/* Email Icon */}
+   </p>
+   <p className="flex items-center mb-2">
+    <FaEnvelope className="mr-2 text-gray-600" /> 
     <strong className="mr-1">Email:</strong> {userData.data?.email}
-  </p>
-  <p className="flex items-center mb-2">
-    <FaPhone className="mr-2 text-gray-600" /> {/* Phone Icon */}
+   </p>
+   <p className="flex items-center mb-2">
+    <FaPhone className="mr-2 text-gray-600" /> 
     <strong className="mr-1">Phone:</strong> {userData.data?.phone}
-  </p>
-  <p className="flex items-center">
-    <FaMapMarkerAlt className="mr-2 text-gray-600" /> {/* Address Icon */}
+   </p>
+   <p className="flex items-center">
+    <FaMapMarkerAlt className="mr-2 text-gray-600" /> 
     <strong className="mr-1">Address:</strong> {userData.data?.address}
-  </p>
-  </motion.div>
+   </p>
+   </motion.div>
    ) : (
-  <p className="text-gray-500">User information not available.</p>
-)}
+   <p className="text-gray-500">User information not available.</p>
+   )}
 
         <div className="mt-6 gap-2 flex justify-between">
           <motion.button
