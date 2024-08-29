@@ -59,7 +59,7 @@ const RoomCard = ({ room }: { room: TRoom }) => {
         </div>
 
         <div className="flex justify-end w-full mt-4 px-2">
-          <Link to={`/products/${room?._id}`}>
+          <Link to={`/meeting-rooms/${room?._id}`}>
             <Button label="View Details" small />
           </Link>
         </div>

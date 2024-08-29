@@ -14,6 +14,7 @@ import ManageSlots from "../pages/Dashboard/ManageSlots/ManageSlots";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import MyBookings from "../pages/Dashboard/MyBookings/MyBookings";
 import ManageBookings from "../pages/Dashboard/ManageBookings/ManageBookings";
+import RoomDetails from "../pages/RoomDetails/RoomDetails";
 
 
 const router = createBrowserRouter([
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
             {
                 path:'/meeting-rooms',
                 element:<MeetingRoom/>
+            },
+            {
+                path:'/meeting-rooms/:id',
+                element:<RoomDetails/>
             },
             {
                 path:'/about-us',

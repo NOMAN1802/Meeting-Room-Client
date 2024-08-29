@@ -18,6 +18,13 @@ const roomManagementApi = baseApi.injectEndpoints({
         }),
         providesTags: ["rooms"],
       }),
+      getSingleRoom: builder.query({
+        query: (id) => ({
+          url: `/rooms/${id}`,
+          method: "GET",
+        }),
+        providesTags: ["rooms"],
+      }),
     updateRoom: builder.mutation({
       query: (args) => ({
         url: `/rooms/${args.id}`,
@@ -40,6 +47,7 @@ const roomManagementApi = baseApi.injectEndpoints({
 export const {
   useAddRoomMutation,
   useGetRoomsQuery,
+  useGetSingleRoomQuery,
   useUpdateRoomMutation,
   useDeleteRoomMutation,
 } = roomManagementApi;
