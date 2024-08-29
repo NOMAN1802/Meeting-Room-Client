@@ -17,9 +17,12 @@ export type FormValues = {
     minPrice: string;
     maxPrice: string;
   }
+
   
   export type SortOption = 'Price: Low to High' | 'Price: High to Low';
   
+  
+
   export type TRoom =  {
     _id: string ;
     name: string;
@@ -33,3 +36,13 @@ export type FormValues = {
     amenities: string[];  
     isDeleted?: boolean; 
 }
+
+export type TSlot = {
+  _id: string;           
+  room: string;          
+  date: string;          
+  startTime: string;     
+  endTime: string;       
+  isBooked: boolean;     
+};
+

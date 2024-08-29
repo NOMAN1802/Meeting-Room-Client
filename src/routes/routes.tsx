@@ -15,6 +15,7 @@ import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import MyBookings from "../pages/Dashboard/MyBookings/MyBookings";
 import ManageBookings from "../pages/Dashboard/ManageBookings/ManageBookings";
 import RoomDetails from "../pages/RoomDetails/RoomDetails";
+import Booking from "../pages/Booking/Booking";
 
 
 const router = createBrowserRouter([
@@ -33,6 +34,19 @@ const router = createBrowserRouter([
             {
                 path:'/meeting-rooms/:id',
                 element:<RoomDetails/>
+            },
+            // {
+            //   path: "/booking/:id",
+            //   element: (
+            //     <ProtectedRoute role="user">
+            //       <Booking />
+            //     </ProtectedRoute>
+            //   ),
+            // },
+
+            {
+              path:'/booking/:id',
+              element:<Booking/>
             },
             {
                 path:'/about-us',

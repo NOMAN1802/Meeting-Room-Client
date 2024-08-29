@@ -2,14 +2,15 @@ import { Link, useParams } from "react-router-dom";
 import { useGetSingleRoomQuery } from "../../redux/api/admin/roomManagement.api";
 import Container from "../../components/Container/Container";
 import Button from "../../components/Button/Button";
-import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store"; 
 import { motion } from "framer-motion";
+import { useAppSelector } from "../../redux/hooks";
 
 const RoomDetails = () => {
   const { id } = useParams();
   const { data } = useGetSingleRoomQuery(id as string);
-  const userRole = useSelector((state: RootState) => state.auth.user?.role);
+  const userRole = useAppSelector((state: RootState) => state.auth.user?.role);
+
 
   return (
     <Container>
@@ -21,7 +22,7 @@ const RoomDetails = () => {
             </li>
             <li className="text-body mt-0.5 text-base">/</li>
             <li className="text-body hover:text-heading px-4 text-sm transition duration-200 ease-in first:pl-0 last:pr-0">
-              <Link to="/meetings-rooms" className="capitalize">
+              <Link to="/meeting-rooms" className="capitalize">
                 Meeting Rooms
               </Link>
             </li>
