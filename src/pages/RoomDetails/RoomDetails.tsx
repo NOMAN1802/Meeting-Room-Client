@@ -103,7 +103,9 @@ const RoomDetails = () => {
           </div>
           
             <Link to={userRole !== 'admin' ? `/booking/${id}` : '#'}>
-              <Button label="Book Now" disabled={userRole === 'admin'} />
+              <Button label="Book Now"
+              //  disabled={userRole === 'admin'} 
+               />
             </Link>
           
         </div>

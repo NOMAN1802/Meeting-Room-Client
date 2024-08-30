@@ -20,6 +20,25 @@ export type FormValues = {
 
   
   export type SortOption = 'Price: Low to High' | 'Price: High to Low';
+
+  export interface CustomJwtPayload {
+    role?: string;
+    exp?: number;
+    iat?: number;
+    sub?: string;
+    
+  }
+
+export type TUser = {
+  _id: string;
+  name: string,
+  email: string,
+  password: string,
+  phone: string,
+  address: string,
+  role?: 'user'|'admin',
+}
+  
   
   
 

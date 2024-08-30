@@ -5,6 +5,7 @@ import { useGetRoomsQuery } from '../../../redux/api/admin/roomManagement.api';
 import ManageRoomRow from './ManageRoomsRow';
 import PageTitle from '../../../components/PageTitle/PageTitle';
 import { TRoom } from '../../../types';
+import { generateBreadcrumbs } from '../../../utils/getPageTitleData';
 
 
 const ManageRooms = () => {
@@ -13,22 +14,22 @@ const ManageRooms = () => {
 
   if (isLoading) {
     return (
-      <p className="text-3xl text-center text-yellow-500 my-2 font-bold">
-        Loading....
-      </p>
+      <div className="flex justify-center items-center h-screen">
+             <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-500"></div>
+           </div>
     );
   }
+  const breadcrumbItems = [
+    { label: "Home", path: "/" },
+    { label: "Dashboard", path: '/dashboard' },
+    { label: "Manage Rooms", path: '/manage-rooms' },
+    
+  ];
 
   return (
     <Container>
-      <PageTitle
-        subHeading={
-          location.pathname === '/dashboard/manage-rooms'
-            ? 'Manage Rooms'
-            : 'No Rooms Found!'
-        }
-        heading="Manage Rooms"
-      />
+      {generateBreadcrumbs(breadcrumbItems)}
+    
       {rooms?.data && rooms?.data?.length > 0 ? (
         <div className="overflow-x-auto">
           <table className="min-w-full bg-gray-200 shadow-md rounded my-6">

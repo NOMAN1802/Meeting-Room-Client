@@ -35,7 +35,7 @@ const Checkout = () => {
 
   const { data: singleRoom, isLoading } = useGetSingleRoomQuery(roomId);
 
-  // Available slots
+
   const { data: slotData, isLoading: isSlotLoading } = useGetAvailableSlotsQuery({
     date: bookedData?.bookingData?.date,
     roomId,
@@ -49,7 +49,7 @@ const Checkout = () => {
     );
   }
 
-  // Filter and map the data
+  
   const availableSlots = slotData?.data.filter((room: TRoom) => !room.isBooked);
   const bookedSlots = availableSlots
     ?.filter((slot: TSlot) => bookedData?.bookingData?.slots?.includes(slot._id))
@@ -151,49 +151,49 @@ const Checkout = () => {
           <h2 className="text-xl font-semibold mt-6 mb-4">Your Details</h2>
            
           {userData ? (
-  <motion.ul
+  <motion.div
     className="bg-gray-100 p-4 rounded-lg grid gap-4"
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ duration: 0.5, delay: 0.4 }}
   >
-    <motion.li
+    <motion.p
       initial={{ y: 0 }}
       animate={{ y: [0, -10, 0] }}
       transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0 }}
-      className="flex items-center rounded p-2 text-sm font-semibold transition duration-200 ease-in-out border border-gray-300 bg-gray-200"
+      className="flex items-center rounded p-2 text-sm font-semibold transition duration-200 ease-in-out border border-gray-300 bg-gray-100"
     >
       <FaUser className="mr-2 text-gray-600" />
       <strong className="mr-1">Name:</strong> {userData.data?.name}
-    </motion.li>
-    <motion.li
+    </motion.p>
+    <motion.p
       initial={{ y: 0 }}
       animate={{ y: [0, -10, 0] }}
       transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.2 }}
-      className="flex items-center rounded p-2 text-sm font-semibold transition duration-200 ease-in-out border border-gray-300 bg-gray-200"
+      className="flex items-center rounded p-2 text-sm font-semibold transition duration-200 ease-in-out border border-gray-300 bg-gray-100"
     >
       <FaEnvelope className="mr-2 text-gray-600" />
       <strong className="mr-1">Email:</strong> {userData.data?.email}
-    </motion.li>
-    <motion.li
+    </motion.p>
+    <motion.p
       initial={{ y: 0 }}
       animate={{ y: [0, -10, 0] }}
       transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.4 }}
-      className="flex items-center rounded p-2 text-sm font-semibold transition duration-200 ease-in-out border border-gray-300 bg-gray-200"
+      className="flex items-center rounded p-2 text-sm font-semibold transition duration-200 ease-in-out border border-gray-300 bg-gray-100"
     >
       <FaPhone className="mr-2 text-gray-600" />
       <strong className="mr-1">Phone:</strong> {userData.data?.phone}
-    </motion.li>
-    <motion.li
+    </motion.p>
+    <motion.p
       initial={{ y: 0 }}
       animate={{ y: [0, -10, 0] }}
       transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.6 }}
-      className="flex items-center rounded p-2 text-sm font-semibold transition duration-200 ease-in-out border border-gray-300 bg-gray-200"
+      className="flex items-center rounded p-2 text-sm font-semibold transition duration-200 ease-in-out border border-gray-300 bg-gray-100"
     >
       <FaMapMarkerAlt className="mr-2 text-gray-600" />
       <strong className="mr-1">Address:</strong> {userData.data?.address}
-    </motion.li>
-  </motion.ul>
+    </motion.p>
+  </motion.div>
   ) : (
    <p className="text-gray-500">User information not available.</p>
    )}
