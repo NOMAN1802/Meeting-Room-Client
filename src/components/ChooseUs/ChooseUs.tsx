@@ -3,10 +3,7 @@ import SectionTitle from "../SectionTitle/SectionTitle";
 import ChoseImage1 from '../../assets/images/chose-1.jpg';
 import ChoseImage2 from '../../assets/images/cose-2.jpg';
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-};
+
 
 const ChooseUs = () => {
   return (
