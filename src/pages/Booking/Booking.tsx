@@ -131,33 +131,37 @@ const Booking = () => {
         )}
 
      <h2 className="text-xl font-semibold mt-6 mb-4">Your Details</h2>
-    {userData ? (
-    <motion.div 
-   className="bg-gray-100 p-4 rounded-lg"
-   initial={{ opacity: 0 }}
-   animate={{ opacity: 1 }}
-   transition={{ duration: 0.5, delay: 0.4 }}
-   >
-   <p className="flex items-center mb-2">
-    <FaUser className="mr-2 text-gray-600" /> 
-    <strong className="mr-1">Name:</strong> {userData.data?.name}
-   </p>
-   <p className="flex items-center mb-2">
-    <FaEnvelope className="mr-2 text-gray-600" /> 
-    <strong className="mr-1">Email:</strong> {userData.data?.email}
-   </p>
-   <p className="flex items-center mb-2">
-    <FaPhone className="mr-2 text-gray-600" /> 
-    <strong className="mr-1">Phone:</strong> {userData.data?.phone}
-   </p>
-   <p className="flex items-center">
-    <FaMapMarkerAlt className="mr-2 text-gray-600" /> 
-    <strong className="mr-1">Address:</strong> {userData.data?.address}
-   </p>
-   </motion.div>
-   ) : (
-   <p className="text-gray-500">User information not available.</p>
-   )}
+  
+{userData ? (
+  <motion.table 
+    className="min-w-full bg-gray-100 shadow-md rounded my-6"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.5, delay: 0.4 }}
+  >
+    <tbody>
+      <tr className="border-b">
+        <td className="py-2 px-4 font-semibold"><FaUser className="mr-2 text-gray-600 inline-block" /> Name:</td>
+        <td className="py-2 px-4">{userData.data?.name}</td>
+      </tr>
+      <tr className="border-b">
+        <td className="py-2 px-4 font-semibold"><FaEnvelope className="mr-2 text-gray-600 inline-block" /> Email:</td>
+        <td className="py-2 px-4">{userData.data?.email}</td>
+      </tr>
+      <tr className="border-b">
+        <td className="py-2 px-4 font-semibold"><FaPhone className="mr-2 text-gray-600 inline-block" /> Phone:</td>
+        <td className="py-2 px-4">{userData.data?.phone}</td>
+      </tr>
+      <tr>
+        <td className="py-2 px-4 font-semibold"><FaMapMarkerAlt className="mr-2 text-gray-600 inline-block" /> Address:</td>
+        <td className="py-2 px-4">{userData.data?.address}</td>
+      </tr>
+    </tbody>
+  </motion.table>
+ ) : (
+  <p className="text-gray-500">User information not available.</p>
+ )}
+
 
         <div className="mt-6 gap-2 flex justify-between">
           <motion.button

@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { Button, Select } from "antd";
+import { Button } from "antd";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 import { IoIosTime } from "react-icons/io";
 import { BsFillCalendar2DateFill } from "react-icons/bs";
@@ -35,7 +35,6 @@ const Checkout = () => {
 
   const { data: singleRoom, isLoading } = useGetSingleRoomQuery(roomId);
 
-
   const { data: slotData, isLoading: isSlotLoading } = useGetAvailableSlotsQuery({
     date: bookedData?.bookingData?.date,
     roomId,
@@ -49,7 +48,6 @@ const Checkout = () => {
     );
   }
 
-  
   const availableSlots = slotData?.data.filter((room: TRoom) => !room.isBooked);
   const bookedSlots = availableSlots
     ?.filter((slot: TSlot) => bookedData?.bookingData?.slots?.includes(slot._id))
@@ -65,8 +63,7 @@ const Checkout = () => {
       const data = bookedData?.bookingData;
       const res = await addBookings(data).unwrap();
       if (res?.success) {
-        setBookingConfirmed(true);
-        dispatch(clearBookingData());
+        window.location.href = res.data.payment_url;
       }
     } catch (error) {
       console.error("Booking failed:", error);
@@ -82,124 +79,105 @@ const Checkout = () => {
   const breadcrumbItems = [
     { label: "Home", path: "/" },
     { label: "Checkout", path: '/checkout' },
-    
   ];
 
   return (
     <Container>
-        {generateBreadcrumbs(breadcrumbItems)}
+      {generateBreadcrumbs(breadcrumbItems)}
       {bookedData?.bookingData ? (
         <div className="bg-gray-200 p-6 rounded-lg shadow-md">
           
           {isLoading ? (
-             <div className="flex justify-center items-center h-screen">
-             <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-500"></div>
-           </div>
+            <div className="flex justify-center items-center h-screen">
+              <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-500"></div>
+            </div>
           ) : (
             <div>
-              <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4">
-              <img
-                src={singleRoom?.data.photo}
-                alt={singleRoom?.data.name}
-                className="w-full h-full \ rounded-lg mb-4"
-              />
+              
+              
+              <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                <img
+                  src={singleRoom?.data.photo}
+                  alt={singleRoom?.data.name}
+                  className="w-full h-full rounded-lg"
+                />
+                </div>
 
-               <img
-                src={singleRoom?.data.extraPhoto}
-                alt={singleRoom?.data.name}
-                className="w-full h-full rounded-lg mb-4"
-              />
+                <motion.table 
+                className="min-w-full bg-gray-100 shadow-md rounded my-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
+                <tbody>
+                  <tr className="border-b">
+                    <td className="py-2 px-4 font-semibold"><BsFillCalendar2DateFill className="mr-2 text-gray-600 inline-block" /> Date:</td>
+                    <td className="py-2 px-4">{bookedData?.bookingData?.date}</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-2 px-4 font-semibold"><IoIosTime className="mr-2 text-gray-600 inline-block" /> Time:</td>
+                    <td className="py-2 px-4">
+                      {bookedSlots?.map((slot: Slot, index: number) => (
+                        <span key={index}>
+                          {slot.startTime} - {slot.endTime}
+                          {index < bookedSlots?.length - 1 ? " & " : ""}
+                        </span>
+                      ))}
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-2 px-4 font-semibold"><FaRegMoneyBillAlt className="mr-2 text-gray-600 inline-block" /> Per Slot:</td>
+                    <td className="py-2 px-4">${singleRoom?.data.pricePerSlot}</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-2 px-4 font-semibold"><FaRegMoneyBillAlt className="mr-2 text-gray-600 inline-block" /> Total Cost:</td>
+                    <td className="py-2 px-4">${totalPrice}</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 px-4 font-semibold">Room Name:</td>
+                    <td className="py-2 px-4">{singleRoom?.data.name}</td>
+                  </tr>
+                </tbody>
+              </motion.table>
               </div>
-              <div className="flex items-center gap-4">
-                <p className="font-medium text-gray-600 my-4">
-                  {singleRoom?.data.name}
-                </p>
-                <p className="flex items-center gap-2">
-                  <BsFillCalendar2DateFill className="text-xl text-gray-600" />{" "}
-                  {bookedData?.bookingData?.date}
-                </p>
-              </div>
-              <p className="flex items-center gap-2">
-                <IoIosTime className="text-2xl text-gray-600" /> <h2>Time:</h2>{" "}
-                {bookedSlots?.map((slot: Slot, index: number) => (
-                  <span key={index}>
-                    {slot.startTime} - {slot.endTime}
-                    {index < bookedSlots?.length - 1 ? " & " : ""}
-                  </span>
-                ))}
-              </p>
-              <p className="font-medium mt-3 mb-2 flex items-center gap-2 text-[#455e45]">
-                <FaRegMoneyBillAlt className="text-2xl text-gray-600" />
-                Per Slot: ${singleRoom?.data.pricePerSlot}
-              </p>
-              <p className="font-medium flex items-center gap-2 text-gray-600">
-                <FaRegMoneyBillAlt className="text-2xl text-gray-600" />
-                Total Cost: ${totalPrice}
-              </p>
             </div>
           )}
-          <div className="bg-gray-100 md:w-3/12 p-2 mt-5 rounded-lg mb-4">
-            <p>
-              <strong>Payment Method:</strong>
-            </p>
-            <Select className="border mt-2 rounded-lg w-full" defaultValue="cod">
-              <Select.Option value="cod">Cash Payment</Select.Option>
-              <Select.Option value="aamarpay">Aamar Pay</Select.Option>
-            </Select>
-          </div>
 
           <h2 className="text-xl font-semibold mt-6 mb-4">Your Details</h2>
-           
-          {userData ? (
-  <motion.div
-    className="bg-gray-100 p-4 rounded-lg grid gap-4"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ duration: 0.5, delay: 0.4 }}
-  >
-    <motion.p
-      initial={{ y: 0 }}
-      animate={{ y: [0, -10, 0] }}
-      transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0 }}
-      className="flex items-center rounded p-2 text-sm font-semibold transition duration-200 ease-in-out border border-gray-300 bg-gray-100"
-    >
-      <FaUser className="mr-2 text-gray-600" />
-      <strong className="mr-1">Name:</strong> {userData.data?.name}
-    </motion.p>
-    <motion.p
-      initial={{ y: 0 }}
-      animate={{ y: [0, -10, 0] }}
-      transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.2 }}
-      className="flex items-center rounded p-2 text-sm font-semibold transition duration-200 ease-in-out border border-gray-300 bg-gray-100"
-    >
-      <FaEnvelope className="mr-2 text-gray-600" />
-      <strong className="mr-1">Email:</strong> {userData.data?.email}
-    </motion.p>
-    <motion.p
-      initial={{ y: 0 }}
-      animate={{ y: [0, -10, 0] }}
-      transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.4 }}
-      className="flex items-center rounded p-2 text-sm font-semibold transition duration-200 ease-in-out border border-gray-300 bg-gray-100"
-    >
-      <FaPhone className="mr-2 text-gray-600" />
-      <strong className="mr-1">Phone:</strong> {userData.data?.phone}
-    </motion.p>
-    <motion.p
-      initial={{ y: 0 }}
-      animate={{ y: [0, -10, 0] }}
-      transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.6 }}
-      className="flex items-center rounded p-2 text-sm font-semibold transition duration-200 ease-in-out border border-gray-300 bg-gray-100"
-    >
-      <FaMapMarkerAlt className="mr-2 text-gray-600" />
-      <strong className="mr-1">Address:</strong> {userData.data?.address}
-    </motion.p>
-  </motion.div>
-  ) : (
-   <p className="text-gray-500">User information not available.</p>
-   )}
-          <div className="flex justify-between mt-6">
 
-          <Button
+          {userData ? (
+            <motion.table 
+              className="min-w-full bg-gray-100 shadow-md rounded my-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              <tbody>
+                <tr className="border-b">
+                  <td className="py-2 px-4 font-semibold"><FaUser className="mr-2 text-gray-600 inline-block" /> Name:</td>
+                  <td className="py-2 px-4">{userData.data?.name}</td>
+                </tr>
+                <tr className="border-b">
+                  <td className="py-2 px-4 font-semibold"><FaEnvelope className="mr-2 text-gray-600 inline-block" /> Email:</td>
+                  <td className="py-2 px-4">{userData.data?.email}</td>
+                </tr>
+                <tr className="border-b">
+                  <td className="py-2 px-4 font-semibold"><FaPhone className="mr-2 text-gray-600 inline-block" /> Phone:</td>
+                  <td className="py-2 px-4">{userData.data?.phone}</td>
+                </tr>
+                <tr>
+                  <td className="py-2 px-4 font-semibold"><FaMapMarkerAlt className="mr-2 text-gray-600 inline-block" /> Address:</td>
+                  <td className="py-2 px-4">{userData.data?.address}</td>
+                </tr>
+              </tbody>
+            </motion.table>
+          ) : (
+            <p className="text-gray-500">User information not available.</p>
+          )}
+
+          <div className="flex justify-between mt-6">
+            <Button
               type="default"
               onClick={handleCancelBooking}
               className="ml-4 bg-red-400"
@@ -210,13 +188,10 @@ const Checkout = () => {
             <Button
               type="default"
               onClick={handleConfirmBooking}
-              
-              className=" bg-gray-700 text-white"
+              className="bg-gray-700 text-white"
             >
               Confirm Booking
             </Button>
-
-          
           </div>
         </div>
       ) : (

@@ -113,12 +113,12 @@ const ManageBookings = () => {
                       ))}
                     </div>
                   </td>
-                  <td className={`py-3 px-6 text-left font-medium ${booking.isConfirmed === "confirmed" ? "text-gray-100" : "text-red-600"}`}>
+                  <td className={`py-3 px-6 text-left font-medium ${booking.isConfirmed === "confirmed" ? "text-gray-600" : "text-red-600"}`}>
                     {booking.isConfirmed}
                   </td>
                   <td className="py-3 px-6 text-left">
                     <button
-                      className={booking.isConfirmed === "confirmed" ? "danger" : "bg-gray-300 p-2 rounded"}
+                      className={booking.isConfirmed === "confirmed" ? "danger" : "bg-gray-500 p-2 rounded"}
                       onClick={() => booking.isConfirmed === "confirmed" ? handleReject(booking._id) : handleApprove(booking._id)}
                     >
                       {booking.isConfirmed === "confirmed" ? <TiDelete className="text-gray-600" /> : <ImCheckboxChecked className="text-green-400" />}
