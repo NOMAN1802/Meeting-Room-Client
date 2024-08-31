@@ -2,11 +2,13 @@
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { FormValues, TRoom } from '../../../types';
+import { FormValues } from '../../../types';
 import AddRoomForm from '../../../components/Form/AddRoomForm';
 import { useAddRoomMutation } from '../../../redux/api/admin/roomManagement.api';
 import { useNavigate } from 'react-router-dom';
 import { generateBreadcrumbs } from '../../../utils/getPageTitleData';
+
+type TRoom ={ pricePerSlot: number; name: string; photo: string; extraPhoto: string; category: "featured" | "regular"; roomNo: number; floorNo: number; capacity: number; amenities: string[]; }
 
 const AddRoom = () => {
   const { register, handleSubmit, formState: { errors }, control } = useForm<FormValues>();

@@ -1,4 +1,5 @@
 import Banner from "../../components/Banner/Banner";
+import ChooseUs from "../../components/ChooseUs/ChooseUs";
 import Container from "../../components/Container/Container";
 import FeaturedRooms from "../../components/FeaturedRooms/FeaturedRooms";
 import SerViceAd from "../../components/ServiceAd/SerViceAd";
@@ -9,6 +10,7 @@ const Home = () => {
             <Banner/>
             <SerViceAd/>
             <FeaturedRooms/>
+            <ChooseUs/>
         </Container>
     );
 };

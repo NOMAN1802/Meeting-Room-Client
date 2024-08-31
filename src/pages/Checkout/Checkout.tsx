@@ -1,4 +1,5 @@
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useAppSelector } from "../../redux/hooks";
 import { Button } from "antd";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 import { IoIosTime } from "react-icons/io";
@@ -7,7 +8,6 @@ import { useState } from "react";
 import { useAddBookingsMutation } from "../../redux/api/booking/bookingApi";
 import { useGetUserByEmailQuery } from "../../redux/api/auth/authApi";
 import { useGetSingleRoomQuery } from "../../redux/api/admin/roomManagement.api";
-import { clearBookingData } from "../../redux/features/bookingSlice";
 import { useGetAvailableSlotsQuery } from "../../redux/api/slot/slotApi";
 import { TRoom, TSlot } from "../../types";
 import Container from "../../components/Container/Container";
@@ -26,7 +26,7 @@ const Checkout = () => {
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
   const [addBookings] = useAddBookingsMutation();
   const navigate = useNavigate()
-  const dispatch = useAppDispatch();
+  
 
   const user = useAppSelector((state) => state.auth.user);
   const { data: userData } = useGetUserByEmailQuery(user?.email);
