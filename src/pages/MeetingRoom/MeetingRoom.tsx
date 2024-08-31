@@ -6,6 +6,7 @@ import RoomCard from "../../components/RoomCard/RoomCard";
 import SearchSection from "../../components/SearchSection/SearchSection";
 import { useGetRoomsQuery } from "../../redux/api/admin/roomManagement.api";
 import { Filters, SortOption, TRoom } from "../../types";
+import { generateBreadcrumbs } from "../../utils/getPageTitleData";
 
 const MeetingRoom = () => {
 
@@ -39,7 +40,7 @@ const MeetingRoom = () => {
       }
   
       if (minPrice) {
-        filtered = filtered.filter((room) => room.price >= parseFloat(minPrice));
+        filtered = filtered.filter((room) => room.pricePerSlot >= parseFloat(minPrice));
       }
   
       if (maxPrice) {
@@ -61,15 +62,21 @@ const MeetingRoom = () => {
       setFilteredRooms(sorted);
     };
   
+    const breadcrumbItems = [
+      { label: "Home", path: "/" },
+      { label: "Meeting Rooms", path: '/meeting-rooms' },
+    ];
+  
     if (isLoading) {
       return (
-        <p className="text-3xl text-center text-yellow-500 my-2 font-bold">
-          Loading....
-        </p>
+        <div className="flex justify-center items-center h-screen">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-500"></div>
+        </div>
       );
     }
     return (
         <Container>
+          {generateBreadcrumbs(breadcrumbItems)}
         <PageTitle heading="All Rooms" subHeading="Enhanced Your Expedience" />
         <SearchSection onSearch={handleSearch} onFilter={handleFilter} onSort={handleSort} />
         <div className="pt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">

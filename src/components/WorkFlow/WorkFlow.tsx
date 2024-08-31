@@ -34,7 +34,7 @@ const WorkFlow = () => {
   return (
     <div className=" bg-gray-100">
       <SectionTitle heading="Work Flow" subHeading="This is exactly how it works" />
-      <div className="container mx-auto px-4 my-4">
+      <div className=" mx-auto px-4 my-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {steps.map((step, index) => (
             <motion.div
