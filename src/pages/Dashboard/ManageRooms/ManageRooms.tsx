@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import Heading from '../../../components/Heading/Heading';
 import { useGetRoomsQuery } from '../../../redux/api/admin/roomManagement.api';
 import ManageRoomRow from './ManageRoomsRow';
-import PageTitle from '../../../components/PageTitle/PageTitle';
 import { TRoom } from '../../../types';
 import { generateBreadcrumbs } from '../../../utils/getPageTitleData';
 
@@ -22,7 +21,7 @@ const ManageRooms = () => {
   const breadcrumbItems = [
     { label: "Home", path: "/" },
     { label: "Dashboard", path: '/dashboard' },
-    { label: "Manage Rooms", path: '/manage-rooms' },
+    { label: "Manage Rooms", path: '/dashboard/manage-rooms' },
     
   ];
 
@@ -48,7 +47,7 @@ const ManageRooms = () => {
             {/* Body */}
             <tbody className="text-gray-700 rounded-md">
               {rooms?.data?.map((room: TRoom) => (
-                <ManageRoomRow key={room._id} room={room} />
+                <ManageRoomRow key={room.id} room={room} />
               ))}
             </tbody>
           </table>

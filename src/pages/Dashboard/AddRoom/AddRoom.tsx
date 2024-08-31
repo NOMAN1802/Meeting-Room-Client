@@ -6,8 +6,7 @@ import { FormValues, TRoom } from '../../../types';
 import AddRoomForm from '../../../components/Form/AddRoomForm';
 import { useAddRoomMutation } from '../../../redux/api/admin/roomManagement.api';
 import { useNavigate } from 'react-router-dom';
-import PageTitle from '../../../components/PageTitle/PageTitle';
-
+import { generateBreadcrumbs } from '../../../utils/getPageTitleData';
 
 const AddRoom = () => {
   const { register, handleSubmit, formState: { errors }, control } = useForm<FormValues>();
@@ -17,8 +16,6 @@ const AddRoom = () => {
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     setLoading(true);
-
-   
 
     try {
       const roomData: TRoom = {
@@ -38,10 +35,23 @@ const AddRoom = () => {
       setLoading(false);
     }
   };
-
+ 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+             <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-500"></div>
+           </div>
+    );
+  }
+  const breadcrumbItems = [
+    { label: "Home", path: "/" },
+    { label: "Dashboard", path: '/dashboard' },
+    { label: "Add Rooms", path: '/dashboard/add-room' },
+    
+  ];
   return (
     <div>
-      <PageTitle heading="Add Room" subHeading="Add Rooms" />
+      {generateBreadcrumbs(breadcrumbItems)}
       <AddRoomForm 
            onSubmit={handleSubmit(onSubmit)} 
            register={register}

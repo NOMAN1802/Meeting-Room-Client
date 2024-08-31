@@ -29,7 +29,6 @@ type AuthResponse = {
     };
   };
 
-
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation<AuthResponse, LoginRequest>({

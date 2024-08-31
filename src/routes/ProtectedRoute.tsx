@@ -27,11 +27,11 @@ const ProtectedRoute = ({ children, role }: TProtectedRoute) => {
   if (role !== undefined && role !== user?.role) {
     dispatch(logout());
 
-    return <Navigate to="/sign-in" replace={true} />;
+    return <Navigate to="/login" replace={true} />;
   }
 
   if (!token) {
-    return <Navigate to="/sign-in" state={{ from: location }} replace={true} />;
+    return <Navigate to="/login" state={{ from: location }} replace={true} />;
   }
 
   return children;

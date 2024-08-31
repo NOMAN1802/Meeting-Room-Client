@@ -8,6 +8,7 @@ const userManagementApi = baseApi.injectEndpoints({
           method: "GET",
           
         }),
+        providesTags: ["users"],
     }),
     updateUserRole: builder.mutation({
       query: ({ userId, role }) => ({

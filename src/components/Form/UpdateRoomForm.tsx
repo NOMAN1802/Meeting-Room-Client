@@ -1,5 +1,4 @@
-import { FormEventHandler } from 'react';
-import { UseFormRegister, FieldErrors, Controller, Control, useForm } from 'react-hook-form';
+import {  Controller,  useForm } from 'react-hook-form';
 import { TbFidgetSpinner } from 'react-icons/tb';
 import { Select } from 'antd';
 import { TRoom } from '../../types/index';
