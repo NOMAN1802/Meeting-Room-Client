@@ -66,3 +66,20 @@ export type TSlot = {
   isBooked: boolean;     
 };
 
+
+
+export type TBooking =  {
+  _id: string;
+  room: {
+    name: string;
+  };
+  user: {
+    name: string;
+  };
+  date: string;
+  isConfirmed: "confirmed" | "unconfirmed";
+  slots: TSlot[];
+  isDeleted: boolean;
+  totalAmount: number;
+  
+}

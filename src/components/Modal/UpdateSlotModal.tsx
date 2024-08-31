@@ -48,18 +48,15 @@ const UpdateSlotModal: React.FC<UpdateSlotModalProps> = ({ slotId, isDialogOpen,
   
     // Reset form after submission
     reset();
-    
-    // Prepare data for the API call
+
     const updatedData = {
       data,
       sId: slotId,
     };
   
     try {
-      // Call the updateSlot mutation
       const res = await updateSlot(updatedData).unwrap();
-  
-      // Check the response and show appropriate toast message
+
       if (res?.success) {
         toast.success(res?.message, { id: toastId, duration: 2000 });
       } else {
@@ -69,7 +66,6 @@ const UpdateSlotModal: React.FC<UpdateSlotModalProps> = ({ slotId, isDialogOpen,
       console.error(err);
       toast.error('Failed to update slot.', { id: toastId, duration: 2000 });
     } finally {
-      // Close the dialog regardless of the outcome
       setIsDialogOpen(false);
     }
   };

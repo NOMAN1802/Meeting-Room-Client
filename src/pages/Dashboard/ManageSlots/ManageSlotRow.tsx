@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import DeleteModal from "../../../components/Modal/DeleteModal";
 import { useDeleteSlotMutation } from "../../../redux/api/admin/slotManagement.api";
 import UpdateSlotModal from "../../../components/Modal/UpdateSlotModal";
+import { FaSync, FaTrash } from "react-icons/fa";
 
 interface ManageSlotRowProps {
   slot: TSlot;
@@ -61,17 +62,18 @@ const ManageSlotRow: React.FC<ManageSlotRowProps> = ({ slot, roomName, roomNo })
         <span>{slot.isBooked  ? 'Booked' : 'Available'}</span>
       </td>
       <td className="py-3 px-6 text-left">
-        <button onClick={() => setIsDialogOpen(true)} className="text-blue-500 hover:text-blue-700">
-          Update
+        <button onClick={() => setIsDialogOpen(true)} className="text-gray-500 hover:text-gray-600 flex gap-1 items-center">
+        <FaSync className="inline-block" /> Update
+          
         </button>
         <UpdateSlotModal slotId={slot._id} isDialogOpen={isDialogOpen} setIsDialogOpen={setIsDialogOpen} />
       </td>
       <td className="py-3 px-6 text-left">
         <button
           onClick={() => setIsDeleteModalOpen(true)}
-          className="text-red-500 hover:text-red-700 transition duration-300"
+         className="text-red-400 hover:text-gray-500 flex gap-1 items-center"
         >
-          Delete
+          <FaTrash className="inline-block" /> Delete
         </button>
         <DeleteModal
           isOpen={isDeleteModalOpen}
