@@ -1,7 +1,7 @@
 import Container from '../../../components/Container/Container';
 import { useLocation } from 'react-router-dom';
 import Heading from '../../../components/Heading/Heading';
-import { TRoom } from '../../../types';
+import {  TUser } from '../../../types';
 
 import { generateBreadcrumbs } from '../../../utils/getPageTitleData';
 import { useGetAllUsersQuery } from '../../../redux/api/admin/userManagement.api';
@@ -48,7 +48,7 @@ const ManageUsers = () => {
             </thead>
             {/* Body */}
             <tbody className="text-gray-700 rounded-md">
-              {users?.data?.map((user: TRoom) => (
+              {users?.data?.map((user: TUser) => (
                 <ManageUserRow key={user._id} user={user } />
               ))}
             </tbody>

@@ -58,7 +58,7 @@ const ManageSlots = () => {
                     key={slot._id}
                     slot={slot}
                     roomName={roomDetails?.name || "Unknown"}
-                    roomNo={roomDetails?.roomNo || "N/A"}
+                    roomNo={roomDetails?.roomNo ?? 0}
                   />
                 );
               })}

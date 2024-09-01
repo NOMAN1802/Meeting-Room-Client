@@ -10,7 +10,7 @@ import { FaSync, FaTrash } from "react-icons/fa";
 interface ManageSlotRowProps {
   slot: TSlot;
   roomName: string;
-  roomNo: string;
+  roomNo: number ;
 }
 
 const ManageSlotRow: React.FC<ManageSlotRowProps> = ({ slot, roomName, roomNo }) => {

@@ -9,7 +9,6 @@ import { motion } from "framer-motion";
 import Container from "../../components/Container/Container";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { useRegisterMutation } from "../../redux/api/auth/authApi";
-import { useAppDispatch } from "../../redux/hooks";
 import { toast } from "sonner";
 
 type FormValues = {

@@ -96,7 +96,7 @@ const UpdateSlotModal: React.FC<UpdateSlotModalProps> = ({ slotId, isDialogOpen,
                   </option>
                 ))}
               </select>
-              {errors.room && <p className="text-red-500">{errors.room.message}</p>}
+              {errors.room && <p className="text-red-500">{errors.room.message?.toString()}</p>}
             </div>
             <div>
               <label className="block text-gray-700">Date</label>
@@ -106,7 +106,7 @@ const UpdateSlotModal: React.FC<UpdateSlotModalProps> = ({ slotId, isDialogOpen,
                 defaultValue={slotData?.data?.date?.split("T")[0]}
                 className="w-full p-2 mt-1 border rounded-md"
               />
-              {errors.date && <p className="text-red-500">{errors.date.message}</p>}
+              {errors.date && <p className="text-red-500">{errors.date.message?.toString()}</p>}
             </div>
             <div>
               <label className="block text-gray-700">Start Time</label>
@@ -116,7 +116,7 @@ const UpdateSlotModal: React.FC<UpdateSlotModalProps> = ({ slotId, isDialogOpen,
                 defaultValue={slotData?.data?.startTime}
                 className="w-full p-2 mt-1 border rounded-md"
               />
-              {errors.startTime && <p className="text-red-500">{errors.startTime.message}</p>}
+              {errors.startTime && <p className="text-red-500">{errors.startTime.message?.toString()}</p>}
             </div>
             <div>
               <label className="block text-gray-700">End Time</label>
@@ -126,7 +126,7 @@ const UpdateSlotModal: React.FC<UpdateSlotModalProps> = ({ slotId, isDialogOpen,
                 defaultValue={slotData?.data?.endTime}
                 className="w-full p-2 mt-1 border rounded-md"
               />
-              {errors.endTime && <p className="text-red-500">{errors.endTime.message}</p>}
+              {errors.endTime && <p className="text-red-500">{errors.endTime.message?.toString()}</p>}
             </div>
             <div className="flex justify-end">
               <button

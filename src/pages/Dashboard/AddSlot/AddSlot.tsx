@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useGetRoomsQuery } from "../../../redux/api/admin/roomManagement.api";
 import { useCreateSlotsMutation } from "../../../redux/api/admin/slotManagement.api";
-import { Form, Select, DatePicker, TimePicker, Typography } from "antd";
+import { Form, Select, DatePicker, TimePicker } from "antd";
 import { Dayjs } from "dayjs";
 import { TRoom } from "../../../types";
 import Container from "../../../components/Container/Container";
@@ -15,7 +15,7 @@ import { useState } from "react";
 import { TbFidgetSpinner } from "react-icons/tb";
 import PageTitle from "../../../components/PageTitle/PageTitle";
 
-const { Title } = Typography;
+
 const { Option } = Select;
 
 const slotValidationSchema = z.object({
