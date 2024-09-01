@@ -18,12 +18,14 @@ import RoomDetails from "../pages/RoomDetails/RoomDetails";
 import Booking from "../pages/Booking/Booking";
 import Checkout from "../pages/Checkout/Checkout";
 import ProtectedRoute from "./ProtectedRoute";
+import ErrorPage from "../components/ErrorPage/ErrorPage";
 
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <App/>,
+        errorElement:<ErrorPage/>,
         children: [
             {
               index: true,
@@ -81,32 +83,46 @@ const router = createBrowserRouter([
         
         {
           path:'add-room',
-          element: <AddRoom/>
+          element: ( <ProtectedRoute role="admin">
+            <AddRoom/>
+          </ProtectedRoute> ) 
       },
         {
           path:'manage-rooms',
-          element: <ManageRooms/>
+          element: ( <ProtectedRoute role="admin">
+            <ManageRooms/>
+          </ProtectedRoute> )
       },
       {
         path:'add-slot',
-        element: <AddSlot/>
+        element:  ( <ProtectedRoute role="admin">
+          <AddSlot/>
+        </ProtectedRoute> ) 
     },
       {
         path:'manage-slots',
-        element: <ManageSlots/>
+        element: ( <ProtectedRoute role="admin">
+          <ManageSlots/>
+        </ProtectedRoute> )
     },
 
     {
       path:'manage-users',
-      element: <ManageUsers/>
+      element: ( <ProtectedRoute role="admin">
+        <ManageUsers/>
+      </ProtectedRoute> ) 
   },
     {
       path:'manage-bookings',
-      element: <ManageBookings/>
+      element: ( <ProtectedRoute role="admin">
+            <ManageBookings/>
+          </ProtectedRoute> ) 
   },
     {
       path:'my-bookings',
-      element: <MyBookings/>
+      element: ( <ProtectedRoute role="user">
+            <MyBookings/>
+          </ProtectedRoute> ) 
   },
         
         
