@@ -54,9 +54,8 @@ This project utilizes the following technologies:
 
 Here is the live deployed base URL:
 
-```bash
-http://localhost:5173
-```
+ - [BookSpace](https://meeting-client.vercel.app/)
+
 
 --------------------------------------------------------------
 ## Run Locally
@@ -70,7 +69,7 @@ http://localhost:5173
 #### Go to the project directory
 
 ```bash
-  cd MEETING-ROOM-Client
+  cd client
 ```
 
 #### Install dependencies
