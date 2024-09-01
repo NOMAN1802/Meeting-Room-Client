@@ -1,24 +1,29 @@
 # Meeting Room Client
 
+
+
 This is a booking management web application.
 
 ## BookingSpace
 
 BookingSpace is an innovative platform designed to streamline the process of booking meeting room slots for coworkers. Whether you’re planning a team meeting, a client presentation, or a brainstorming session, BookingSpace makes it easy to secure the perfect space for your needs.
 
+---------------------------------------------------------------
+
 ## Features
 
 - **User Authentication**: Login and signup for users.
 - **Authorization**: Token-based authorization with user role-based features.
-- **Meeting Room Search**: Search for available meeting rooms.
-- **Booking**: Users can book slots for meetings.
-- **Payment**: Users can pay for booked slots.
 
-## User Roles
+- **User**:
+  - Meeting Room Search: Search for available meeting rooms.
+  - Booking: Users can book slots for meetings.
+  - Payment: Users can pay for booked slots.
 
 - **Admin**:
   - Can add and manage rooms and slots.
-  - Can manage users and bookings.
+  - Can manage users, rooms and bookings.
+-----------------------------------------------------------------------
 
 ## Technologies Used
 
@@ -42,6 +47,8 @@ This project utilizes the following technologies:
 - **Tools & Libraries**:
   - [Redux](https://redux.js.org/) - A library for managing application state.
   - [React Hook Form](https://react-hook-form.com/) - A library for managing form state in React.
+ 
+  ------------------------------------------------------------
 
 ## Live Link
 
@@ -49,4 +56,32 @@ Here is the live deployed base URL:
 
 ```bash
 http://localhost:5173
+```
+
+--------------------------------------------------------------
+## Run Locally
+
+#### Clone the project
+
+```bash
+  git clone <link>
+```
+
+#### Go to the project directory
+
+```bash
+  cd MEETING-ROOM-Client
+```
+
+#### Install dependencies
+
+```bash
+  npm install
+```
+
+#### Start the server
+
+```bash
+  npm run start
+```
 
