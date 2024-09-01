@@ -2,6 +2,7 @@ import Container from "../../components/Container/Container";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import CountUp from 'react-countup';
 import { generateBreadcrumbs } from "../../utils/getPageTitleData";
+import Team from "../../components/Team/Team";
 
 const AboutUs = () => {
 
@@ -71,6 +72,8 @@ const AboutUs = () => {
                 </div>
             </div>
             <div>
+
+                <Team/>
                 
             </div>
         </Container>
