@@ -7,7 +7,7 @@ import Marquee from 'react-fast-marquee';
 const Footer = () => {
     return (
         <Container>
-            <div className='bg-gray-700 text-gray-100  mt-10 py-10'>
+            <div className='bg-gray-700 text-gray-100  mt-6 py-10'>
             <div className='max-w-screen-xl md:mx-auto mx-10 py-5 grid grid-cols-1 md:grid-cols-3 md:justify-items-center gap-10 md:gap-20'>
                 <div>
                 <Link to='/' className='flex-grow flex justify-center lg:justify-start gap-2'>

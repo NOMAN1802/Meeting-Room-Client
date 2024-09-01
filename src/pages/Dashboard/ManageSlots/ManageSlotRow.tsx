@@ -19,7 +19,11 @@ const ManageSlotRow: React.FC<ManageSlotRowProps> = ({ slot, roomName, roomNo })
   const [deleteSlot] = useDeleteSlotMutation();
 
   const handleDelete = async () => {
-  
+    
+    if (slot.isBooked) {
+      toast.error("Slot is already booked, cannot delete.");
+      return;
+    }
     try {
       await deleteSlot(slot._id).unwrap();
       toast.success("Slot deleted successfully!");

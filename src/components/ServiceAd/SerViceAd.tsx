@@ -22,7 +22,7 @@ const SerViceAd = () => {
   return (
     <div>
       <SectionTitle heading="Top Services" subHeading="That's why you prefer us..." />
-      <div className='max-w-screen-xl md:mx-auto mx-5 my-20 sm:mx-20'>
+      <div className='max-w-screen-xl md:mx-auto mx-5 my-6 sm:mx-20'>
         <div className='my-20 grid grid-cols-1 md:grid-cols-4 gap-10'>
           {
             ads.map((ad, index) => (

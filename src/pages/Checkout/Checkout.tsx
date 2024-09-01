@@ -85,7 +85,7 @@ const Checkout = () => {
     <Container>
       {generateBreadcrumbs(breadcrumbItems)}
       {bookedData?.bookingData ? (
-        <div className="bg-gray-200 p-6 rounded-lg shadow-md">
+        <div className="bg-gray-200 p-6 rounded-lg shadow-md my-6">
           
           {isLoading ? (
             <div className="flex justify-center items-center h-screen">

@@ -34,7 +34,7 @@ const Testimonials = () => {
         subHeading={'What our clients say'}
         heading={'Testimonials'}
       />
-      <div className="my-4">
+      <div className="my-6">
         <Swiper
           modules={[Navigation]}
           navigation

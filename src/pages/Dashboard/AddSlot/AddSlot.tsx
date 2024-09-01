@@ -13,6 +13,7 @@ import Container from "../../../components/Container/Container";
 import { generateBreadcrumbs } from "../../../utils/getPageTitleData";
 import { useState } from "react";
 import { TbFidgetSpinner } from "react-icons/tb";
+import PageTitle from "../../../components/PageTitle/PageTitle";
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -93,9 +94,9 @@ const AddSlot = () => {
   return (
     <Container>
         {generateBreadcrumbs(breadcrumbItems)}
-        
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-3xl mx-auto p-6 space-y-6">
-        <Title level={3} className="text-center text-gray-800">Create Slot</Title>
+        <PageTitle heading='Add Slot' subHeading='Add slot for slot booking'/>
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-4xl mx-auto p-6 space-y-6 my-6 bg-gray-200 rounded-lg">
+       
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-1 text-sm">

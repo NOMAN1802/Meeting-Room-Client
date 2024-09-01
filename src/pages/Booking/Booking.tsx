@@ -62,7 +62,7 @@ const Booking = () => {
   const breadcrumbItems = [
     { label: "Home", path: "/" },
     { label: "Booking", path: `/booking/${roomId}` },
-    { label:  "Loading..." }
+    
   ];
 
   if (isLoading) {
@@ -81,7 +81,7 @@ const Booking = () => {
       
 
       <motion.div 
-        className="border mt-5 border-gray-500 p-6 rounded-lg shadow-lg"
+        className="border mt-5 border-gray-500 p-6 rounded-lg shadow-lg my-6"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}

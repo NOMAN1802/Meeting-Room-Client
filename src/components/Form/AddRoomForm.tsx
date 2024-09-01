@@ -22,7 +22,7 @@ const AddRoomForm: React.FC<AddRoomFormProps> = ({ onSubmit, register, errors, l
   ];
 
   return (
-    <div className="w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-slate-800 rounded-xl bg-gray-50">
+    <div className="w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-slate-800 rounded-xl bg-gray-200 my-6">
       <form onSubmit={onSubmit} className="space-y-6 w-full max-w-2xl p-6">
         <div className="grid sm:grid-cols-1 md:grid-cols-2 w-full gap-2">
           <div className="space-y-1 text-sm">

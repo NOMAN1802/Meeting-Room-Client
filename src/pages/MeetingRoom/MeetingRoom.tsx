@@ -35,9 +35,9 @@ const MeetingRoom = () => {
       const { category, minPrice, maxPrice } = filters;
       let filtered = allRooms;
       
-      if (category !== "All Categories") {
-        filtered = filtered.filter((room) => room.category === category);
-      }
+      if (category && category !== "All Categories") {
+        filtered = filtered.filter((room) => room.category.toLowerCase() === category.toLowerCase());
+    }
   
       if (minPrice) {
         filtered = filtered.filter((room) => room.pricePerSlot >= parseFloat(minPrice));

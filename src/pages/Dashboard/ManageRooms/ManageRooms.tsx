@@ -5,6 +5,7 @@ import { useGetRoomsQuery } from '../../../redux/api/admin/roomManagement.api';
 import ManageRoomRow from './ManageRoomsRow';
 import { TRoom } from '../../../types';
 import { generateBreadcrumbs } from '../../../utils/getPageTitleData';
+import PageTitle from '../../../components/PageTitle/PageTitle';
 
 
 const ManageRooms = () => {
@@ -28,7 +29,7 @@ const ManageRooms = () => {
   return (
     <Container>
       {generateBreadcrumbs(breadcrumbItems)}
-    
+      <PageTitle heading="Manage Rooms" subHeading="Manage available rooms" />
       {rooms?.data && rooms?.data?.length > 0 ? (
         <div className="overflow-x-auto">
           <table className="min-w-full bg-gray-200 shadow-md rounded my-6">
@@ -47,7 +48,7 @@ const ManageRooms = () => {
             {/* Body */}
             <tbody className="text-gray-700 rounded-md">
               {rooms?.data?.map((room: TRoom) => (
-                <ManageRoomRow key={room.id} room={room} />
+                <ManageRoomRow key={room._id} room={room} />
               ))}
             </tbody>
           </table>

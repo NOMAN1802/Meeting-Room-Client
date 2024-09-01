@@ -45,7 +45,7 @@ const UpdateSlotModal: React.FC<UpdateSlotModalProps> = ({ slotId, isDialogOpen,
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading('Updating slot...');
-  
+    
     // Reset form after submission
     reset();
 
@@ -64,7 +64,7 @@ const UpdateSlotModal: React.FC<UpdateSlotModalProps> = ({ slotId, isDialogOpen,
       }
     } catch (err) {
       console.error(err);
-      toast.error('Failed to update slot.', { id: toastId, duration: 2000 });
+      toast.error('Can not Update.', { id: toastId, duration: 2000 });
     } finally {
       setIsDialogOpen(false);
     }

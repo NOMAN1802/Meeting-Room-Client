@@ -16,7 +16,7 @@ const AboutUs = () => {
         <Container>
             {generateBreadcrumbs(breadcrumbItems)}
             <PageTitle heading="About Us" subHeading="Stay connected to us..." />
-            <div className='my-10 max-w-screen-xl md:mx-auto mx-10 md:flex justify-center items-start gap-10'>
+            <div className='my-6 max-w-screen-xl md:mx-auto mx-10 md:flex justify-center items-start gap-10'>
                 <div className='md:w-1/2 p-4 grid grid-cols-1 md:grid-cols-2 gap-4'>
                     <div className="space-y-5">
                         <img src="https://img.freepik.com/free-vector/online-transactions-concept-illustration_114360-5602.jpg?ga=GA1.1.1079181062.1724613555&semt=ais_hybrid" className="rounded-lg shadow-lg" />

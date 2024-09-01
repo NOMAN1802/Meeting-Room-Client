@@ -79,7 +79,7 @@ const Login: React.FC = () => {
   return (
     <Container>
       <PageTitle heading="Sign In" subHeading="Please Sign In to continue...." />
-      <div className="p-auto m-auto max-w-screen-xl md:flex justify-center items-center my-4">
+      <div className="p-auto m-auto max-w-screen-xl md:flex justify-center items-center my-6">
         <motion.form
           initial={{ y: 0 }}
           animate={{ y: [0, -10, 0] }}

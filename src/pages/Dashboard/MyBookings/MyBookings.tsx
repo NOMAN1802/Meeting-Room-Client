@@ -2,6 +2,7 @@ import Container from "../../../components/Container/Container";
 import { generateBreadcrumbs } from "../../../utils/getPageTitleData";
 import { TBooking } from "../../../types";
 import { useMyBookingsQuery } from "../../../redux/api/booking/bookingApi";
+import PageTitle from "../../../components/PageTitle/PageTitle";
 
 const MyBookings = () => {
   const { data: bookings, isLoading } = useMyBookingsQuery(undefined, {
@@ -28,8 +29,10 @@ const MyBookings = () => {
   return (
     <Container>
       {generateBreadcrumbs(breadcrumbItems)}
-      <div className="w-full px-8">
-        <h2 className="text-center text-3xl my-6">My Bookings</h2>
+
+      <PageTitle heading="My Bookings" subHeading="My booked slots" />
+      <div className="w-full px-8 my-6">
+       
         <div className="overflow-x-auto">
           <table className="min-w-full bg-gray-200 shadow-md rounded my-6">
             {/* Table Head */}

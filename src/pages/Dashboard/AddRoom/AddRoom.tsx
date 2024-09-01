@@ -7,6 +7,7 @@ import AddRoomForm from '../../../components/Form/AddRoomForm';
 import { useAddRoomMutation } from '../../../redux/api/admin/roomManagement.api';
 import { useNavigate } from 'react-router-dom';
 import { generateBreadcrumbs } from '../../../utils/getPageTitleData';
+import PageTitle from '../../../components/PageTitle/PageTitle';
 
 type TRoom ={ pricePerSlot: number; name: string; photo: string; extraPhoto: string; category: "featured" | "regular"; roomNo: number; floorNo: number; capacity: number; amenities: string[]; }
 
@@ -54,6 +55,8 @@ const AddRoom = () => {
   return (
     <div>
       {generateBreadcrumbs(breadcrumbItems)}
+
+      <PageTitle heading='Add Room' subHeading='Add room for slot booking'/>
       <AddRoomForm 
            onSubmit={handleSubmit(onSubmit)} 
            register={register}

@@ -6,6 +6,7 @@ import { TRoom } from '../../../types';
 import { generateBreadcrumbs } from '../../../utils/getPageTitleData';
 import { useGetAllUsersQuery } from '../../../redux/api/admin/userManagement.api';
 import ManageUserRow from './ManageUserRow';
+import PageTitle from '../../../components/PageTitle/PageTitle';
 
 const ManageUsers = () => {
 
@@ -29,9 +30,9 @@ const ManageUsers = () => {
     return (
         <Container>
      {generateBreadcrumbs(breadcrumbItems)}
-
+     <PageTitle heading="Manage users" subHeading="Manage authorized users" />
       {users?.data && users?.data?.length > 0 ? (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto my-6">
           <table className="min-w-full bg-gray-200 shadow-md rounded my-6">
             {/* Head */}
             <thead className="bg-gray-600 text-gray-200">

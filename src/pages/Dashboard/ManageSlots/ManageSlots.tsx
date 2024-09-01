@@ -4,6 +4,7 @@ import ManageSlotRow from "./ManageSlotRow";
 import { TRoom, TSlot } from "../../../types";
 import { useGetAllSlotsQuery } from "../../../redux/api/admin/slotManagement.api";
 import { useGetRoomsQuery } from "../../../redux/api/admin/roomManagement.api";
+import PageTitle from "../../../components/PageTitle/PageTitle";
 
 
 const ManageSlots = () => {
@@ -31,8 +32,9 @@ const ManageSlots = () => {
   return (
     <Container>
       {generateBreadcrumbs(breadcrumbItems)}
+      <PageTitle heading="Manage Slots" subHeading="Manage available slots" />
       {slots?.data && slots?.data.length > 0 ? (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto my-6">
           <table className="min-w-full bg-gray-200 shadow-md rounded my-6">
             {/* Table Head */}
             <thead className="bg-gray-600 text-gray-200">

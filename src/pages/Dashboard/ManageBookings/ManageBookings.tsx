@@ -10,6 +10,7 @@ import { TiDelete } from "react-icons/ti";
 import { ImCheckboxChecked } from "react-icons/im";
 import DeleteBookingModal from "../../../components/Modal/DeleteBookingModal";
 import { FaTrash } from "react-icons/fa";
+import PageTitle from "../../../components/PageTitle/PageTitle";
 
 const ManageBookings = () => {
   const { data: bookings, isLoading } = useGetAllBookingsQuery(undefined, { pollingInterval: 1000 });
@@ -78,8 +79,9 @@ const ManageBookings = () => {
   return (
     <Container>
       {generateBreadcrumbs(breadcrumbItems)}
+      <PageTitle heading="Manage Bookings" subHeading="Manage user's bookings" />
       <div className="w-full px-8">
-        <h2 className="text-center text-3xl my-6">Manage Bookings</h2>
+        
         <div className="overflow-x-auto">
           <table className="min-w-full bg-gray-200 shadow-md rounded my-6">
             {/* Table Head */}
