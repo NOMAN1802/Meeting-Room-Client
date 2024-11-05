@@ -45,17 +45,17 @@ const Testimonials = () => {
             <SwiperSlide key={review._id}>
               <div
                 
-                className='flex flex-col items-center bg-gradient-to-r from-gray-200 via-gray-300 to-blue-200 hover:shadow-2xl shadow-lg  rounded-xl'
+                className='flex flex-col items-center bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400  shadow-lg  rounded-xl'
               >
                 <img 
                   src={review.image} 
                   alt={review.name} 
-                  className='w-32 h-32 rounded-full object-cover mb-4 border-4 border-gray-300' 
+                  className='w-32 h-32 rounded-full object-cover mb-4 border-2 border-blue-300 p-4' 
                 />
-                <p className='text-2xl text-center text-gray-600'>{review.role}</p>
+                <p className='text-2xl text-center text-gray-600 p-4'>{review.role}</p>
                 <FaQuoteLeft className='mt-4 text-4xl text-gray-600' />
-                <p className='py-6 text-gray-700 italic'>" {review.details} "</p>
-                <h3 className='text-2xl font-semibold text-gray-600'>{review.name}</h3>
+                <p className='py-6 text-gray-700 italic p-4'>" {review.details} "</p>
+                <h3 className='text-2xl font-semibold text-gray-600 p-4'>{review.name}</h3>
               </div>
             </SwiperSlide>
           ))}

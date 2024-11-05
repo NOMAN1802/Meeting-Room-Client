@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import Container from "../../../components/Container/Container";
-import { generateBreadcrumbs } from "../../../utils/getPageTitleData";
 import { TBooking } from "../../../types";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -70,15 +68,9 @@ const ManageBookings = () => {
     }
   };
 
-  const breadcrumbItems = [
-    { label: "Home", path: "/" },
-    { label: "Dashboard", path: "/dashboard" },
-    { label: "Manage Bookings", path: "/dashboard/manage-bookings" },
-  ];
-
   return (
-    <Container>
-      {generateBreadcrumbs(breadcrumbItems)}
+    <>
+      
       <PageTitle heading="Manage Bookings" subHeading="Manage user's bookings" />
       <div className="w-full px-8">
         
@@ -155,7 +147,7 @@ const ManageBookings = () => {
           />
         )}
       </div>
-    </Container>
+    </>
   );
 };
 

@@ -1,58 +1,184 @@
-import { Outlet, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import Sidebar from '../components/Dashboard/Sidebar';
-import { motion } from "framer-motion";
-import { useAppSelector } from '../redux/hooks';
-import { useCurrentUser } from '../redux/features/authSlice';
-import ProfImg from "../assets/images/admin.png"
+import React, { useState, useEffect } from 'react';
+import { Layout, Menu, Breadcrumb, Button, theme } from 'antd';
+import { Outlet, useLocation, NavLink } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { logout, useCurrentUser } from '../redux/features/authSlice';
+import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
+import {
+  IoBagAddSharp,
+} from 'react-icons/io5';
+import { MdDashboard, MdManageAccounts, MdOutlineManageAccounts } from 'react-icons/md';
+import { FaHome, FaSignOutAlt } from 'react-icons/fa';
 
-const DashboardLayout = () => {
+const { Header, Content, Sider } = Layout;
+
+const DashboardLayout: React.FC = () => {
   const location = useLocation();
-  const [isOutletEmpty, setIsOutletEmpty] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
   const user = useAppSelector(useCurrentUser);
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
+  const {
+    token: { borderRadiusLG},
+  } = theme.useToken();
 
   useEffect(() => {
-    setIsOutletEmpty(location.pathname === '/dashboard');
+    // Logic to handle outlet empty state can be added here if needed
   }, [location]);
 
+  const adminMenuItems = [
+    {
+      key: 'dashboard',
+      icon: <MdDashboard />,
+      label: <NavLink to='/dashboard'>Dashboard</NavLink>,
+    },
+    {
+      key: 'add-room',
+      icon: <IoBagAddSharp />,
+      label: <NavLink to='/dashboard/add-room'>Add Room</NavLink>,
+    },
+    {
+      key: 'manage-rooms',
+      icon: <MdOutlineManageAccounts />,
+      label: <NavLink to='/dashboard/manage-rooms'>Manage Rooms</NavLink>,
+    },
+    {
+      key: 'add-slot',
+      icon: <IoBagAddSharp />,
+      label: <NavLink to='/dashboard/add-slot'>Add Slot</NavLink>,
+    },
+    {
+      key: 'manage-slots',
+      icon: <MdManageAccounts />,
+      label: <NavLink to='/dashboard/manage-slots'>Manage Slots</NavLink>,
+    },
+    {
+      key: 'manage-bookings',
+      icon: <MdManageAccounts />,
+      label: <NavLink to='/dashboard/manage-bookings'>Manage Bookings</NavLink>,
+    },
+    {
+      key: 'manage-users',
+      icon: <UserOutlined/>,
+      label: <NavLink to='/dashboard/manage-users'>Manage Users</NavLink>,
+    },
+    {
+      key: 'home',
+      icon: <FaHome />,
+      label: <NavLink to='/'>Home</NavLink>,
+    },
+    {
+      key: 'logout',
+      icon: <FaSignOutAlt/>,
+      label: <NavLink to='/' onClick={handleLogout}>Logout</NavLink>,
+    },
+  ];
+
+  const userMenuItems = [
+    {
+      key: 'dashboard',
+      icon: <MdDashboard />,
+      label: <NavLink to='/dashboard'>Dashboard</NavLink>,
+    },
+    {
+      key: 'my-bookings',
+      icon: <MdManageAccounts />,
+      label: <NavLink to='/dashboard/my-bookings'>My Bookings</NavLink>,
+    },
+    {
+      key: 'home',
+      icon: <FaHome />,
+      label: <NavLink to='/'>Home</NavLink>,
+    },
+    {
+      key: 'logout',
+      icon: <FaSignOutAlt/>,
+      label: <NavLink to='/' onClick={handleLogout}>Logout</NavLink>,
+    },
+  ];
+
+// Function to generate breadcrumbs based on the current path
+const generateBreadcrumbs = () => {
+  const pathSegments = location.pathname.split('/').filter(segment => segment);
+  const breadcrumbItems = pathSegments.map((segment, index) => {
+    const path = `/${pathSegments.slice(0, index + 1).join('/')}`;
+    return {
+      label: segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' '),
+      path: path.endsWith('/') ? path.slice(0, -1) : path,
+    };
+  });
+
+  // Add 'Home' at the beginning of the breadcrumbs
+  breadcrumbItems.unshift({ label: 'Home', path: '/' });
+
+  return breadcrumbItems;
+};
+
+  const breadcrumbs = generateBreadcrumbs();
+
   return (
-    <div className='relative min-h-screen md:flex'>
-      <Sidebar />
-      <div className='flex-1 flex flex-col justify-center items-center md:ml-24 bg-gray-100'>
-        {isOutletEmpty && (
-          <motion.div
-            initial={{ y: 0 }}
-            animate={{ y: [0, -10, 0] }}
-            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.2 }}
-            className='absolute top-12 text-center bg-gradient-to-r from-gray-400 via-gray-500 to-blue-300 hover:shadow-2xl shadow-lg rounded-lg p-4 md:max-w-2xl w-full flex flex-col items-center md:grid md:grid-cols-3 gap-4'
-          >
-           
-            {/* Welcome Text */}
-            <div className='col-span-2 flex flex-col justify-center'>
-           
-
-              <h1 className='text-2xl text-gray-100'>Welcome</h1>
-              <p className='text-lg text-gray-100'>{user?.name}</p>
-            </div>
-
-             {/* Profile Image */}
-             <div className='col-span-1 flex justify-center md:justify-end'>
-              <img
-                src={ProfImg}
-                alt='Profile'
-                className='w-20 h-20 rounded-full object-cover'
-              />
-            </div>
-          </motion.div>
-        )}
-        <div className='p-6 w-full'>
+    <Layout style={{ minHeight: '100vh' }}>
+      <Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}  theme="dark">
+        <div className="logo" />
+        <Menu className='space-y-2' theme="dark" mode="inline" defaultSelectedKeys={[location.pathname.split('/').pop() || '']}>
+          
+          {user?.role === 'admin' ? (
+            adminMenuItems.map(item => (
+              <Menu.Item key={item.key} icon={item.icon} className='font-semibold'>
+               
+                {item.label}
+              </Menu.Item>
+            ))
+          ) : user?.role === 'user' ? (
+            userMenuItems.map(item => (
+              <Menu.Item key={item.key} icon={item.icon}>
+                {item.label}
+              </Menu.Item>
+            ))
+          ) : null}
+        </Menu>
+      </Sider>
+      <Layout>
+        <Header style={{ padding: 0, background: '#f3f4f6' }}> 
+          <Button
+            type="text"
+            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            onClick={() => setCollapsed(!collapsed)}
+            style={{
+              fontSize: '16px',
+              width: 64,
+              height: 64,
+            }}
+          />
+        </Header>
+        <Content style={{
+          margin: '24px 16px',
+          padding: 24,
+          minHeight: 280,
+          background: '#f3f4f6',
+          borderRadius: borderRadiusLG,
+          overflow: 'auto', 
+        }}>
+          <Breadcrumb style={{ margin: '16px 0' }}>
+            {breadcrumbs.map((item, index) => (
+              <Breadcrumb.Item key={index}>
+                <NavLink to={item.path}>{item.label}</NavLink>
+              </Breadcrumb.Item>
+            ))}
+          </Breadcrumb>
           <Outlet />
-        </div>
-      </div>
-    </div>
+        </Content>
+      </Layout>
+    </Layout>
   );
 };
 
 export default DashboardLayout;
-
-

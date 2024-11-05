@@ -3,8 +3,17 @@ import { useGetSingleRoomQuery } from "../../redux/api/admin/roomManagement.api"
 import Container from "../../components/Container/Container";
 import Button from "../../components/Button/Button";
 import { RootState } from "../../redux/store"; 
-import { motion } from "framer-motion";
 import { useAppSelector } from "../../redux/hooks";
+
+import { FaWifi, FaDesktop, FaMicrophone, FaChalkboard, FaMusic } from "react-icons/fa"; 
+// Define icons for the specified amenities
+const amenityIcons: { [key: string]: JSX.Element } = {
+  Computer: <FaDesktop />,
+  "Sound System": <FaMusic />,
+  Wifi: <FaWifi />,
+  "Micro Phone": <FaMicrophone />,
+  "White Board": <FaChalkboard />,
+};
 
 const RoomDetails = () => {
   const { id } = useParams();
@@ -44,18 +53,24 @@ const RoomDetails = () => {
                 key={i}
                 className="h-full transition duration-150 ease-in hover:opacity-90"
               >
-                <motion.img
-                 key={i}
-                 initial={{ y: 0 }}
-                 animate={{ y: [0, -10, 0] }}
-                 transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: i * 0.2 }}
+                <img
+                 
                   src={image}
                   alt={`Room Image ${i + 1}`}
                   className="w-full h-full object-cover rounded-lg"
                 />
               </div>
             ))}
+            
           </div>
+          {/* Details */}
+          <div className="border-b border-gray-300 p-3">
+          </div>
+          <div className="mb-4">
+            <p className="text-heading mb-3.5 text-lg font-bold md:text-xl lg:text-2xl 2xl:text-3xl capitalize my-6">About {data?.data?.name} :</p>
+              <p className="text-md my-6 text-gray-600 leading-relaxed">{data?.data?.details}</p>
+            </div>
+            
         </div>
 
         <div className="col-span-3 pt-8 lg:pt-0">
@@ -81,30 +96,28 @@ const RoomDetails = () => {
                 <p>Capacity: {data?.data.capacity}</p>
               </div>
             </div>
-            <div className="mb-4">
-              <h3 className="text-heading mb-4 text-base font-semibold capitalize md:text-lg">
-                Amenities
-              </h3>
-              <ul className="colors -mr-3 flex flex-wrap items-center gap-x-4">
-                {data?.data.amenities.map((amenity: string, index: number) => (
-                  <motion.li
-                  key={index}
-                  initial={{ y: 0 }}
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay:  index * 0.2 }}
-                   
-                    className="cursor-pointer rounded p-1 text-sm font-semibold transition duration-200 ease-in-out border border-gray-300 bg-gray-200 w-24 h-9 flex justify-center items-center"
-                  >
-                    {amenity}
-                  </motion.li>
-                ))}
-              </ul>
-            </div>
+            <div className="border-b border-gray-300 pb-3">
+            <h3 className="text-heading mb-4 text-base font-semibold capitalize md:text-lg">
+            Amenities
+          </h3>
+          <ul className="flex flex-wrap items-center gap-4">
+            {data?.data.amenities.map((amenity: string) => (
+              <li
+                
+                className="flex items-center gap-2 p-2 text-sm font-semibold border border-gray-300 bg-gray-200 rounded-lg"
+              >
+                {amenityIcons[amenity] || <FaDesktop />} 
+                {amenity}
+              </li>
+            ))}
+          </ul>
+        </div>
+
           </div>
           
             <Link to={userRole !== 'admin' ? `/booking/${id}` : '#'}>
               <Button label="Book Now"
-              //  disabled={userRole === 'admin'} 
+               disabled={userRole === 'admin'} 
                />
             </Link>
           

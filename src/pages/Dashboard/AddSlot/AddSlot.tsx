@@ -9,8 +9,6 @@ import { useCreateSlotsMutation } from "../../../redux/api/admin/slotManagement.
 import { Form, Select, DatePicker, TimePicker } from "antd";
 import { Dayjs } from "dayjs";
 import { TRoom } from "../../../types";
-import Container from "../../../components/Container/Container";
-import { generateBreadcrumbs } from "../../../utils/getPageTitleData";
 import { useState } from "react";
 import { TbFidgetSpinner } from "react-icons/tb";
 import PageTitle from "../../../components/PageTitle/PageTitle";
@@ -84,16 +82,10 @@ const AddSlot = () => {
            </div>
     );
   }
-  const breadcrumbItems = [
-    { label: "Home", path: "/" },
-    { label: "Dashboard", path: '/dashboard' },
-    { label: "Add Slot", path: '/dashboard/add-slot' },
-    
-  ];
+
 
   return (
-    <Container>
-        {generateBreadcrumbs(breadcrumbItems)}
+    <>
         <PageTitle heading='Add Slot' subHeading='Add slot for slot booking'/>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-4xl mx-auto p-6 space-y-6 my-6 bg-gray-200 rounded-lg">
        
@@ -180,7 +172,7 @@ const AddSlot = () => {
           </button>
         </Form.Item>
       </form>
-    </Container>
+    </>
   );
 };
 

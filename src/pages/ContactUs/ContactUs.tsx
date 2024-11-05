@@ -1,114 +1,203 @@
+import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import { useForm, ValidationError } from "@formspree/react";
+import { FaCheckCircle } from "react-icons/fa";
+import AnimatedText from "../../components/AnimatedText/AnimatedText";
+import Contact from '../../assets/images/img.png';
 import Container from "../../components/Container/Container";
-import { FaEnvelope, FaLocationDot, FaPhone } from "react-icons/fa6";
 import PageTitle from "../../components/PageTitle/PageTitle";
-import { toast } from "sonner";
-import { motion } from "framer-motion";
-import React from "react";
-import { generateBreadcrumbs } from "../../utils/getPageTitleData";
-
-const contactDetails = [
-    {
-        icon: <FaPhone className='text-6xl text-blue-500' />,
-        title: "Telephone",
-        info: ["+88017********", "+88019********"],
-    },
-    {
-        icon: <FaEnvelope className='text-6xl text-green-500' />,
-        title: "Our Mail",
-        info: ["techagency01@gmail.com", "techagency3@gmail.com"],
-    },
-    {
-        icon: <FaLocationDot className='text-6xl text-red-500' />,
-        title: "Location",
-        info: ["Dhaka, Bangladesh"],
-    },
-];
 
 const ContactUs = () => {
-    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const form = e.currentTarget;
-        const name = (form.elements.namedItem('name') as HTMLInputElement).value;
-        const email = (form.elements.namedItem('email') as HTMLInputElement).value;
-        const subject = (form.elements.namedItem('subject') as HTMLInputElement).value;
-        const message = (form.elements.namedItem('message') as HTMLTextAreaElement).value;
-        const query = { name, email, subject, message };
-        if (query) {
-            toast.success("Message sent successfully");
-            form.reset();
-        }
-    };
-    const breadcrumbItems = [
-        { label: "Home", path: "/" },
-        { label: "About Us", path: 'about-us' },
-       
-      ];
-    return (
-        <Container>
-            {generateBreadcrumbs(breadcrumbItems)}
-            <PageTitle heading="Contact Us" subHeading="We are available 24/7" />
-            <div className='flex flex-col md:flex-row justify-center items-center gap-10 pt-10 my-6'>
-                {contactDetails.map((detail, index) => (
-                    <motion.div
-                        key={index}
-                        initial={{ y: 0 }}
-                        animate={{ y: [0, -10, 0] }}
-                        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: index * 0.2 }}
-                        className={`text-center ${index !== 1 ? '' : 'border-x-2 border-gray-300 p-10'}`}
-                    >
-                        <div className='flex justify-center mb-4'>
-                            {detail.icon}
-                        </div>
-                        <h1 className='text-xl font-bold text-gray-700'>{detail.title}</h1>
-                        {detail.info.map((line, i) => (
-                            <p key={i} className="text-gray-600">{line}</p>
-                        ))}
-                    </motion.div>
-                ))}
-            </div>
-            <div className='max-w-screen-xl md:mx-auto mx-5 my-10'>
-                <h1 className='text-3xl text-center my-20 font-semibold text-gray-600'>
-                    Get Support From Experienced Instructors
-                </h1>
-                <div className='flex justify-center items-center'>
-                    <form className='text-center w-full md:w-3/4 lg:w-1/2' onSubmit={handleFormSubmit}>
-                        <input
-                            type="text"
-                            name="name"
-                            className='p-3 border-2 border-gray-300 rounded-lg text-lg w-full my-3 focus:outline-none focus:ring-2 focus:ring-blue-500'
-                            placeholder='Full Name'
-                            required
-                        />
-                        <input
-                            type="email"
-                            name="email"
-                            className='p-3 border-2 border-gray-300 rounded-lg text-lg w-full my-3 focus:outline-none focus:ring-2 focus:ring-blue-500'
-                            placeholder='Your Email'
-                            required
-                        />
-                        <input
-                            type="text"
-                            name="subject"
-                            className='p-3 border-2 border-gray-300 rounded-lg text-lg w-full my-3 focus:outline-none focus:ring-2 focus:ring-blue-500'
-                            placeholder='Your Subject'
-                            required
-                        />
-                        <textarea
-                            name="message"
-                            className='w-full h-40 border-2 border-gray-300 rounded-lg p-3 text-lg my-3 focus:outline-none focus:ring-2 focus:ring-blue-500'
-                            placeholder='Your Message'
-                            required
-                        ></textarea>
-                        <button
-                            type="submit"
-                            className='w-full md:w-1/4 bg-gray-500 hover:bg-gray-700 text-white text-xl font-semibold px-6 py-3 rounded-lg shadow-md transition-transform hover:scale-105'>
-                            Submit
-                        </button>
-                    </form>
+  const [state, handleSubmit] = useForm("xwpkljyd");
+
+  // State for form input
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [showIcon, setShowIcon] = useState(false);
+
+  // Handle input change
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  // Clear form after submission
+  useEffect(() => {
+    if (state.succeeded) {
+      setShowIcon(true);
+
+      // Clear form input
+      setFormData({
+        firstname: "",
+        lastname: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+
+      // Handle icon revert after 3 seconds
+      const timer = setTimeout(() => {
+        setShowIcon(false);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [state.succeeded]);
+
+  // Handle form submission
+  const handleFormSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    handleSubmit(formData);
+  };
+
+  return (
+    <>
+    <PageTitle heading="Contact Us" subHeading="We are available 24/7"/>
+      <Container>
+        <div className="mx-auto my-4">
+          <div className="flex flex-col items-center xl:flex-row gap-6 lg:gap-8">
+            {/* Left Side: Form */}
+            <div className="flex-1 flex flex-col items-center xl:items-start">
+              <AnimatedText
+                text="Please Leave Your Message Here"
+                textStyles="text-2xl md:text-4xl mb-8 text-center xl:text-left text-gray-600 "
+              />
+
+              {/* Form */}
+              <form onSubmit={handleFormSubmit} className="flex flex-col gap-6 w-full max-w-full">
+                {/* Firstname and Lastname */}
+                <div className="flex gap-8">
+                  <div className="flex-1">
+                    <label htmlFor="firstname" className="block mb-2 text-sm font-medium text-gray-700">
+                      First Name <span className="text-accent">*</span>
+                    </label>
+                    <input
+                      onChange={handleChange}
+                      type="text"
+                      id="firstname"
+                      name="firstname"
+                      value={formData.firstname}
+                      className="w-full h-12 px-4 border-2 border-gray-300 rounded-lg outline-none focus:border-accent placeholder-gray-500"
+                      placeholder="First Name"
+                      required
+                    />
+                  </div>
+
+                  <div className="flex-1">
+                    <label htmlFor="lastname" className="block mb-2 text-sm font-medium text-gray-700">
+                      Last Name <span className="text-accent">*</span>
+                    </label>
+                    <input
+                      onChange={handleChange}
+                      type="text"
+                      id="lastname"
+                      name="lastname"
+                      value={formData.lastname}
+                      className="w-full h-12 px-4 border-2 border-gray-300 rounded-lg outline-none focus:border-accent placeholder-gray-500"
+                      placeholder="Last Name"
+                      required
+                    />
+                  </div>
                 </div>
+
+                {/* Email */}
+                <div>
+                  <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-700">
+                    Email <span className="text-accent">*</span>
+                  </label>
+                  <input
+                    onChange={handleChange}
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    className="w-full h-12 px-4 border-2 border-gray-300 rounded-lg outline-none focus:border-accent placeholder-gray-500"
+                    placeholder="youremail@mail.com"
+                    required
+                  />
+                  <ValidationError prefix="Email" field="email" errors={state.errors} />
+                </div>
+
+                {/* Phone */}
+                <div>
+                  <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-700">
+                    Phone <span className="text-accent">*</span>
+                  </label>
+                  <input
+                    onChange={handleChange}
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    className="w-full h-12 px-4 border-2 border-gray-300 rounded-lg outline-none focus:border-accent placeholder-gray-500"
+                    placeholder="+880 1980931802"
+                    required
+                  />
+                </div>
+
+                {/* Message */}
+                <div>
+                  <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-700">
+                    Message <span className="text-accent">*</span>
+                  </label>
+                  <textarea
+                    onChange={handleChange}
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    className="w-full p-4 border-2 border-gray-300 rounded-lg outline-none focus:border-accent placeholder-gray-500 resize-none"
+                    placeholder="Leave a message..."
+                    rows={5}
+                    required
+                  />
+                  <ValidationError prefix="Message" field="message" errors={state.errors} />
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  disabled={state.submitting}
+                  className="w-full h-12 rounded-lg bg-gray-600 hover:bg-gray-700 text-white font-medium flex items-center justify-center gap-2"
+                >
+                  {state.submitting ? (
+                    <span>Sending...</span>
+                  ) : (
+                    <>
+                      <FaCheckCircle
+                        className={`text-white text-lg transition-opacity duration-500 ease-in-out ${
+                          showIcon ? "opacity-100" : "opacity-0"
+                        }`}
+                      />
+                      <span
+                        className={`transition-opacity duration-500 ease-in-out ${
+                          showIcon ? "opacity-0" : "opacity-100"
+                        }`}
+                      >
+                        Send message
+                      </span>
+                    </>
+                  )}
+                </button>
+              </form>
             </div>
-        </Container>
-    );
+
+            {/* Right Side: Image */}
+            <div className="hidden xl:flex w-[600px] h-[650px] rounded-lg overflow-hidden shadow-lg">
+              <img
+                src={Contact}
+                className="object-cover w-full h-full"
+                alt="Contact"
+              />
+            </div>
+          </div>
+        </div>
+      </Container>
+    </>
+  );
 };
 
 export default ContactUs;

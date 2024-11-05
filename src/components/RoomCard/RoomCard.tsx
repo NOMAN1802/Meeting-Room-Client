@@ -1,68 +1,77 @@
 import { Link } from "react-router-dom";
-import Button from "../Button/Button";
-import { FaLandmark } from "react-icons/fa6";
-import { MdProductionQuantityLimits } from "react-icons/md";
-import { FaDollarSign } from "react-icons/fa";
+import { FaWifi, FaMicrophone, FaDesktop, FaChalkboardTeacher, FaVolumeUp,FaRegBuilding } from "react-icons/fa";
+import { MdGroups } from "react-icons/md";
 import { TRoom } from "../../types/index";
 
-const RoomCard = ({ room }: { room: TRoom }) => {
-  return (
-    <div className="relative rounded overflow-hidden shadow-xl transform hover:scale-110 duration-100 -right-1 -skew-x-2">
-      <img src={room.photo} alt="" className="w-full h-52 object-cover" />
 
-      <div className="absolute bottom-48 left-0">
-        <p className="relative -right-1 -skew-x-6 bg-gray-500 px-4 py-2 font-bold text-white opacity-25">
-          {room.category}
-        </p>
+const RoomCard = ({ room }: { room: TRoom }) => {
+  // Mapping amenities to icons
+  const amenityIcons: { [key: string]: JSX.Element } = {
+    Wifi: <FaWifi />,
+    "White Board": <FaChalkboardTeacher />,
+    "Micro Phone": <FaMicrophone />,
+    "Sound System": <FaVolumeUp />,
+    Computer: <FaDesktop />,
+  };
+
+  return (
+    <div className="relative rounded-lg overflow-hidden shadow-lg bg-white border border-gray-200 hover:shadow-2xl transform hover:scale-105 transition duration-300 flex flex-col">
+      {/* Category Label */}
+      <div className="absolute top-3 left-3">
+        <span
+          className={`${
+            room.category === "featured" ? "bg-gray-600" : "bg-gray-400"
+          } text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm`}
+        >
+          {room.category.charAt(0).toUpperCase() + room.category.slice(1)}
+        </span>
       </div>
 
-      <div className="flex flex-col items-start my-2 py-2 space-y-2">
-        <div className="font-semibold text-lg text-gray-600 mx-2">
-          {room?.name}
-        </div>
+      {/* Image */}
+      <img src={room.photo} alt="Room" className="w-full h-56 object-cover transition-transform duration-500 hover:scale-110" />
 
-        <div className="flex flex-row items-center justify-between w-full">
-          <p className="mx-2 flex flex-row items-center justify-between gap-2 text-gray-500 text-sm">
-            <FaLandmark />
-            Room Number: {room?.roomNo}
+      {/* Room Details */}
+      <div className="p-5 flex-1 flex flex-col">
+        <h3 className="text-xl font-semibold text-gray-800 mb-2">{room.name}</h3>
+        
+        {/* Room Info */}
+        <div className="flex items-center justify-between gap-4 text-gray-600 text-sm mt-1 mb-4">
+          <p className="flex items-center gap-1">
+            <MdGroups className="text-gray-600" /> Capacity: {room.capacity}
           </p>
+          <p className="flex items-center gap-1"><FaRegBuilding className="text-gray-600" /> Room No: {room.roomNo}</p>
         </div>
 
-        <div className="flex flex-row items-center justify-between w-full">
-          <div>
-            <p className="mx-2 flex flex-row items-center justify-between gap-2 text-gray-500 text-sm">
-              <MdProductionQuantityLimits />
-              Capacity: {room?.capacity}
-            </p>
-          </div>
-
-          <div>
-            <p className="mx-2 flex flex-row items-center justify-between gap-2 text-gray-600 text-sm">
-              <FaDollarSign />
-              Price: {room?.pricePerSlot}
-            </p>
-          </div>
-        </div>
-
-        <div className="flex flex-col items-start w-full">
-          <span className="text-gray-500 text-sm mx-2">Amenities:</span>
-          <div className="flex flex-wrap gap-2 mx-2">
-            {room?.amenities?.map((amenity, index) => (
+        {/* Amenities Section */}
+        <div className="mt-2 mb-4">
+          
+          <div className="flex flex-wrap gap-4 text-xs text-gray-600">
+          <h4 className="text-sm text-gray-500 font-semibold mb-2">Amenities:</h4>
+            {room.amenities.map((amenity, index) => (
               <span
                 key={index}
-                className="bg-gray-200 text-gray-600 px-2 py-1 rounded text-xs"
+                className="flex items-center gap-1 bg-gray-200 text-gray-700 px-2 py-1 rounded-full hover:scale-105 shadow-sm"
               >
-                {amenity}
+                {amenityIcons[amenity]} 
               </span>
             ))}
           </div>
         </div>
+      </div>
 
-        <div className="flex justify-end w-full mt-4 px-2">
-          <Link to={`/meeting-rooms/${room?._id}`}>
-            <Button label="View Details" small />
-          </Link>
-        </div>
+      {/* Bottom Section */}
+      <div className="flex items-center justify-between p-4 bg-gray-50 border-t">
+        <p className="text-2xl font-semibold text-gray-600">
+          ${room.pricePerSlot} <span className="text-sm text-gray-500">per slot</span>
+        </p>
+
+        {/* Button */}
+        <Link to={`/meeting-rooms/${room._id}`}>
+  <button className="bg-gray-600 hover:bg-gray-700 text-white text-base font-medium px-4 py-1.5 rounded-full">
+    View Details
+  </button>
+</Link>
+
       </div>
     </div>
   );

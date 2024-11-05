@@ -19,6 +19,7 @@ import Booking from "../pages/Booking/Booking";
 import Checkout from "../pages/Checkout/Checkout";
 import ProtectedRoute from "./ProtectedRoute";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
+import Dashboard from "../components/Dashboard/Dashboard";
 
 
 const router = createBrowserRouter([
@@ -79,7 +80,10 @@ const router = createBrowserRouter([
       path: "/dashboard",
       element: <DashboardLayout/>,
       children: [
-      
+        {
+          index: true,
+          element: <Dashboard />,
+        },
         
         {
           path:'add-room',

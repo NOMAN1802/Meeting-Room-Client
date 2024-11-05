@@ -151,6 +151,17 @@ const UpdateRoomForm: React.FC<UpdateRoomFormProps> = ({ onSubmit, defaultValues
           </div>
         </div>
 
+        <div className="space-y-1 text-sm">
+            <label htmlFor="details" className="block text-gray-600">Details</label>
+            <textarea rows={5}
+              className="w-full px-4 py-3 text-gray-800 border border-gray-300 focus:outline-gray-500 rounded-md"
+              {...register("details", { required: "Details is required" })}
+              id="details"
+              placeholder="Room Details"
+            />
+            {errors.details && <p className="text-red-600">{errors.details.message}</p>}
+          </div>
+
         <button
           type="submit"
           className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-gray-600"

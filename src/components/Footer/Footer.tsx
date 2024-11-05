@@ -6,9 +6,10 @@ import Marquee from 'react-fast-marquee';
 
 const Footer = () => {
     return (
-        <Container>
+        
             <div className='bg-gray-700 text-gray-100  mt-6 py-10'>
-            <div className='max-w-screen-xl md:mx-auto mx-10 py-5 grid grid-cols-1 md:grid-cols-3 md:justify-items-center gap-10 md:gap-20'>
+             <Container>  
+            <div className=' grid grid-cols-1 md:grid-cols-3 md:justify-between gap-10 md:gap-24'>
                 <div>
                 <Link to='/' className='flex-grow flex justify-center lg:justify-start gap-2'>
           <motion.img
@@ -16,8 +17,8 @@ const Footer = () => {
           animate={{ y: [0, -10, 0] }}
           transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay:  0.5 }}
           src="/bookingcom.svg" height={28} width={28} alt="" />
-            <h2 className='text-3xl font-bold text-black'>
-              <span className='text-gray-600'>Book</span>Space
+            <h2 className='text-3xl font-bold text-gray-400'>
+              <span className='text-gray-300'>Book</span>Space
             </h2>
           </Link>
                     <p className='my-4 text-lg'>We support programs that create advancement for people</p>
@@ -65,7 +66,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <div  className='text-center mt-5 border-t-2 mx-10 border-gray-500'>
+            <div  className='text-center mt-5 border-t-2 mx-2 border-gray-500'>
                 <Marquee>
                 <h1 
                 className='mt-5'>
@@ -74,8 +75,9 @@ const Footer = () => {
                 </Marquee>
                
             </div>
+            </Container> 
         </div>
-        </Container>
+      
     );
 };
 

@@ -5,7 +5,6 @@ import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
 import { AiOutlineLock } from "react-icons/ai";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
 import Container from "../../components/Container/Container";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { useAppDispatch } from "../../redux/hooks";
@@ -80,11 +79,9 @@ const Login: React.FC = () => {
     <Container>
       <PageTitle heading="Sign In" subHeading="Please Sign In to continue...." />
       <div className="p-auto m-auto max-w-screen-xl md:flex justify-center items-center my-6">
-        <motion.form
-          initial={{ y: 0 }}
-          animate={{ y: [0, -10, 0] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.5 }}
-          className="space-y-4 max-w-md w-full"
+        <form
+         
+          className="space-y-4 max-w-md p-4 mx-auto bg-gray-200 rounded-lg"
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex flex-col items-start relative">
@@ -122,7 +119,7 @@ const Login: React.FC = () => {
           </div>
 
           <div>
-            <button type="submit" className="bg-gray-500 w-[85%] rounded-md py-3 text-white">
+            <button type="submit" className="bg-gray-600 w-[92%] md:w-full rounded-md py-2 text-white">
               Log In
             </button>
           </div>
@@ -141,7 +138,7 @@ const Login: React.FC = () => {
               </p>
             </Link>
           </div>
-        </motion.form>
+        </form>
       </div>
     </Container>
   );

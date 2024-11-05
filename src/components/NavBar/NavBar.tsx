@@ -35,8 +35,8 @@ const NavBar: React.FC = () => {
   };
 
   return (
-    <nav className='z-50 static bg-[#FFFFFF]'>
-      <div className='flex flex-col lg:flex-row lg:justify-between lg:p-5 px-6 lg:px-20 border-b w-full'>
+    <nav className='z-50 static bg-gray-700 text-gray-100'>
+      <div className='flex flex-col lg:flex-row lg:justify-between lg:p-5 px-6 lg:px-20 w-full'>
         {/* Logo and Menu Toggle */}
         <div className='flex items-center justify-between w-full lg:w-auto'>
           <Link to='/' className='flex items-center gap-2'>
@@ -49,8 +49,8 @@ const NavBar: React.FC = () => {
               width={28}
               alt=''
             />
-            <h2 className='text-3xl font-bold text-black'>
-              <span className='text-gray-600'>Book</span>Space
+            <h2 className='text-3xl font-bold text-gray-400'>
+              <span className='text-gray-300'>Book</span>Space
             </h2>
           </Link>
 
@@ -194,7 +194,7 @@ const NavBar: React.FC = () => {
             <MenuDropdown />
           ) : (
             <NavLink className='flex items-center relative' to='/login'>
-              <Button label='Login' medium />
+              <Button label='Login' small />
             </NavLink>
           )}
         </div>

@@ -22,13 +22,13 @@ const AddRoomForm: React.FC<AddRoomFormProps> = ({ onSubmit, register, errors, l
   ];
 
   return (
-    <div className="w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-slate-800 rounded-xl bg-gray-200 my-6">
+    <div className="w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-200 my-6">
       <form onSubmit={onSubmit} className="space-y-6 w-full max-w-2xl p-6">
         <div className="grid sm:grid-cols-1 md:grid-cols-2 w-full gap-2">
           <div className="space-y-1 text-sm">
-            <label htmlFor="name" className="block text-slate-600">Name</label>
+            <label htmlFor="name" className="block text-gray-600">Name</label>
             <input
-              className="w-full px-4 py-3 text-slate-800 border border-slate-300 focus:outline-slate-500 rounded-md"
+              className="w-full px-4 py-3 text-gray-800 border border-gray-300 focus:outline-gray-500 rounded-md"
               {...register("name", { required: "Name is required" })}
               id="name"
               type="text"
@@ -40,7 +40,7 @@ const AddRoomForm: React.FC<AddRoomFormProps> = ({ onSubmit, register, errors, l
           <div className="space-y-1 text-sm">
             <label htmlFor="category" className="block text-gray-600">Category</label>
             <select
-              className="w-full px-4 py-3 text-slate-800 border border-slate-300 focus:outline-slate-500 rounded-md"
+              className="w-full px-4 py-3 text-gray-800 border border-gray-300 focus:outline-gray-500 rounded-md"
               {...register("category", { required: "Category is required" })}
               id="category"
             >
@@ -54,9 +54,9 @@ const AddRoomForm: React.FC<AddRoomFormProps> = ({ onSubmit, register, errors, l
 
         <div className="grid sm:grid-cols-1 md:grid-cols-2 w-full gap-2">
           <div className="space-y-1 text-sm">
-            <label htmlFor="roomNo" className="block text-slate-600">Room Number</label>
+            <label htmlFor="roomNo" className="block text-gray-600">Room Number</label>
             <input
-              className="w-full px-4 py-3 text-slate-800 border border-slate-300 focus:outline-slate-500 rounded-md"
+              className="w-full px-4 py-3 text-gray-800 border border-gray-300 focus:outline-gray-500 rounded-md"
               {...register("roomNo", { required: "Room number is required", valueAsNumber: true })}
               id="roomNo"
               type="number"
@@ -66,9 +66,9 @@ const AddRoomForm: React.FC<AddRoomFormProps> = ({ onSubmit, register, errors, l
           </div>
 
           <div className="space-y-1 text-sm">
-            <label htmlFor="floorNo" className="block text-slate-600">Floor Number</label>
+            <label htmlFor="floorNo" className="block text-gray-600">Floor Number</label>
             <input
-              className="w-full px-4 py-3 text-slate-800 border border-slate-300 focus:outline-slate-500 rounded-md"
+              className="w-full px-4 py-3 text-gray-800 border border-gray-300 focus:outline-gray-500 rounded-md"
               {...register("floorNo", { required: "Floor number is required", valueAsNumber: true })}
               id="floorNo"
               type="number"
@@ -80,9 +80,9 @@ const AddRoomForm: React.FC<AddRoomFormProps> = ({ onSubmit, register, errors, l
 
         <div className="grid sm:grid-cols-1 md:grid-cols-2 w-full gap-2">
           <div className="space-y-1 text-sm">
-            <label htmlFor="capacity" className="block text-slate-600">Capacity</label>
+            <label htmlFor="capacity" className="block text-gray-600">Capacity</label>
             <input
-              className="w-full px-4 py-3 text-slate-800 border border-slate-300 focus:outline-slate-500 rounded-md"
+              className="w-full px-4 py-3 text-gray-800 border border-gray-300 focus:outline-gray-500 rounded-md"
               {...register("capacity", { required: "Capacity is required", valueAsNumber: true })}
               id="capacity"
               type="number"
@@ -92,9 +92,9 @@ const AddRoomForm: React.FC<AddRoomFormProps> = ({ onSubmit, register, errors, l
           </div>
 
           <div className="space-y-1 text-sm">
-            <label htmlFor="pricePerSlot" className="block text-slate-600">Price Per Slot</label>
+            <label htmlFor="pricePerSlot" className="block text-gray-600">Price Per Slot</label>
             <input
-              className="w-full px-4 py-3 text-slate-800 border border-slate-300 focus:outline-slate-500 rounded-md"
+              className="w-full px-4 py-3 text-gray-800 border border-gray-300 focus:outline-gray-500 rounded-md"
               {...register("pricePerSlot", { required: "Price per slot is required", valueAsNumber: true })}
               id="pricePerSlot"
               type="number"
@@ -106,7 +106,7 @@ const AddRoomForm: React.FC<AddRoomFormProps> = ({ onSubmit, register, errors, l
 
         {/* Amenities Multi-Select Field */}
         <div className="space-y-1 text-sm">
-          <label htmlFor="amenities" className="block text-slate-600">Amenities</label>
+          <label htmlFor="amenities" className="block text-gray-600">Amenities</label>
           <Controller
             name="amenities"
             control={control}
@@ -127,9 +127,9 @@ const AddRoomForm: React.FC<AddRoomFormProps> = ({ onSubmit, register, errors, l
 
         <div className="grid sm:grid-cols-1 md:grid-cols-2 w-full gap-2">
           <div className="space-y-1 text-sm">
-            <label htmlFor="photo" className="block text-slate-600">Photo</label>
+            <label htmlFor="photo" className="block text-gray-600">Photo</label>
             <input
-              className="w-full px-4 py-3 text-slate-800 border border-slate-300 focus:outline-slate-500 rounded-md"
+              className="w-full px-4 py-3 text-gray-800 border border-gray-300 focus:outline-gray-500 rounded-md"
               {...register("photo", { required: "Photo is required" })}
               id="photo"
               type="url"
@@ -139,9 +139,9 @@ const AddRoomForm: React.FC<AddRoomFormProps> = ({ onSubmit, register, errors, l
           </div>
 
           <div className="space-y-1 text-sm">
-            <label htmlFor="extraPhoto" className="block text-slate-600">Extra Photo</label>
+            <label htmlFor="extraPhoto" className="block text-gray-600">Extra Photo</label>
             <input
-              className="w-full px-4 py-3 text-slate-800 border border-slate-300 focus:outline-slate-500 rounded-md"
+              className="w-full px-4 py-3 text-gray-800 border border-gray-300 focus:outline-gray-500 rounded-md"
               {...register("extraPhoto", { required: "Extra photo is required" })}
               id="extraPhoto"
               type="url"
@@ -151,9 +151,20 @@ const AddRoomForm: React.FC<AddRoomFormProps> = ({ onSubmit, register, errors, l
           </div>
         </div>
 
+        <div className="space-y-1 text-sm">
+            <label htmlFor="details" className="block text-gray-600">Details</label>
+            <textarea rows={5}
+              className="w-full px-4 py-3 text-gray-800 border border-gray-300 focus:outline-gray-500 rounded-md"
+              {...register("details", { required: "Details is required" })}
+              id="details"
+              placeholder="Room Details"
+            />
+            {errors.details && <p className="text-red-600">{errors.details.message}</p>}
+          </div>
+
         <button
           type="submit"
-          className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-slate-600"
+          className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-gray-600"
         >
           {loading ? (
             <TbFidgetSpinner className="m-auto animate-spin" size={24} />

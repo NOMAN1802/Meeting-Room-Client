@@ -1,10 +1,8 @@
-import Container from '../../../components/Container/Container';
 import { useLocation } from 'react-router-dom';
 import Heading from '../../../components/Heading/Heading';
 import { useGetRoomsQuery } from '../../../redux/api/admin/roomManagement.api';
 import ManageRoomRow from './ManageRoomsRow';
 import { TRoom } from '../../../types';
-import { generateBreadcrumbs } from '../../../utils/getPageTitleData';
 import PageTitle from '../../../components/PageTitle/PageTitle';
 
 
@@ -19,16 +17,11 @@ const ManageRooms = () => {
            </div>
     );
   }
-  const breadcrumbItems = [
-    { label: "Home", path: "/" },
-    { label: "Dashboard", path: '/dashboard' },
-    { label: "Manage Rooms", path: '/dashboard/manage-rooms' },
-    
-  ];
+
 
   return (
-    <Container>
-      {generateBreadcrumbs(breadcrumbItems)}
+    <>
+   
       <PageTitle heading="Manage Rooms" subHeading="Manage available rooms" />
       {rooms?.data && rooms?.data?.length > 0 ? (
         <div className="overflow-x-auto">
@@ -70,7 +63,7 @@ const ManageRooms = () => {
           />
         </div>
       )}
-    </Container>
+    </>
   );
 };
 

@@ -2,7 +2,6 @@ import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { CSSProperties } from 'react';
-import BannerImag1 from '../../assets/images/banner-1.jpeg'
 import BannerImag2 from '../../assets/images/banner-2.jpeg'
 import BannerImag3 from '../../assets/images/banner-3.jpeg'
 import BannerImag4 from '../../assets/images/banner-4.jpeg'
@@ -28,7 +27,7 @@ const Banner = () => {
         padding: '10px', 
     };
     return (
-        <div className="relative ">
+        <div className="relative sm:h-full md:h-[70vh] overflow-hidden">
       <div>
         <Carousel
           className='relative z-10'
@@ -57,9 +56,7 @@ const Banner = () => {
           }
         >
           
-          <div className="slide">
-            <img className="h-2/3 object-cover w-full" src={BannerImag1} alt="Banner 1" />
-          </div>
+         
           <div className="slide">
             <img className="h-2/3 object-cover w-full" src={BannerImag2} alt="Banner 2" />
           </div>

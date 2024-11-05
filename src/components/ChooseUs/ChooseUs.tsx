@@ -10,7 +10,7 @@ const ChooseUs = () => {
     <div className=" bg-gray-100">
       <SectionTitle heading="Why Us" subHeading="Explore it" />
       
-      <div className=" mx-auto px-4 my-6">
+      <div className="max-w-screen-2xl md:mx-auto  my-6 md:px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 ">
           {/* Secure Transactions Card */}
           <motion.div 

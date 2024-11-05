@@ -8,14 +8,16 @@ import WorkFlow from "../../components/WorkFlow/WorkFlow";
 
 const Home = () => {
     return (
+        <>
+        <Banner/>
         <Container>
-            <Banner/>
             <SerViceAd/>
             <FeaturedRooms/>
             <ChooseUs/>
             <WorkFlow/>
             <Testimonials/>
         </Container>
+        </>
     );
 };
 

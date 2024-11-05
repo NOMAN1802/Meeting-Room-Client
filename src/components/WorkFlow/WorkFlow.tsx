@@ -32,25 +32,25 @@ const WorkFlow = () => {
   ];
 
   return (
-    <div className=" bg-gray-100">
+    <div>
       <SectionTitle heading="Work Flow" subHeading="This is exactly how it works" />
-      <div className=" mx-auto px-4 my-6">
+      <div className="max-w-screen-2xl md:mx-auto my-6 md:px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {steps.map((step, index) => (
             <motion.div
               key={index}
-              className="bg-gradient-to-r from-gray-400 via-gray-500 to-blue-300 hover:shadow-2xl shadow-lg rounded-xl p-6 text-center relative overflow-hidden"
+              className="bg-gray-300 hover:shadow-2xl shadow-lg rounded-xl p-6 text-center relative overflow-hidden"
               initial="hidden"
               animate="visible"
               variants={cardVariants}
               whileHover={{ scale: 1.05 }}
             >
-              <div className="absolute inset-0 flex justify-center items-center opacity-20">
-                <div className="text-8xl text-white">{step.icon}</div>
+              <div className="absolute inset-0 flex justify-center items-center opacity-95">
+                <div className="text-8xl text-gray-600">{step.icon}</div>
               </div>
               <div className="relative z-10">
-                <h3 className="text-2xl font-semibold mb-2 text-white">{step.label}</h3>
-                <p className="text-gray-200 font-light">{step.description}</p>
+                <h3 className="text-2xl font-semibold mb-2 text-gray-600">{step.label}</h3>
+                <p className="text-gray-600 font-light">{step.description}</p>
               </div>
             </motion.div>
           ))}

@@ -1,5 +1,3 @@
-import Container from "../../../components/Container/Container";
-import { generateBreadcrumbs } from "../../../utils/getPageTitleData";
 import ManageSlotRow from "./ManageSlotRow";
 import { TRoom, TSlot } from "../../../types";
 import { useGetAllSlotsQuery } from "../../../redux/api/admin/slotManagement.api";
@@ -23,15 +21,11 @@ const ManageSlots = () => {
     return rooms?.data?.find((room: TRoom) => room._id === roomId);
   };
 
-  const breadcrumbItems = [
-    { label: "Home", path: "/" },
-    { label: "Dashboard", path: "/dashboard" },
-    { label: "Manage Slots", path: "/dashboard/manage-slots" },
-  ];
+
 
   return (
-    <Container>
-      {generateBreadcrumbs(breadcrumbItems)}
+    <>
+     
       <PageTitle heading="Manage Slots" subHeading="Manage available slots" />
       {slots?.data && slots?.data.length > 0 ? (
         <div className="overflow-x-auto my-6">
@@ -70,7 +64,7 @@ const ManageSlots = () => {
           <p className="text-center text-gray-700 font-bold">No Slots found...</p>
         </div>
       )}
-    </Container>
+    </>
   );
 };
 

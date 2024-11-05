@@ -60,16 +60,20 @@ const SearchSection: React.FC<SearchSectionProps> = ({ onSearch, onFilter, onSor
   };
 
   return (
-    <div style={{ padding: '20px', backgroundColor: '#f9f9f9', borderRadius: '8px' }}>
+    <div style={{ padding: '20px', borderRadius: '8px' }}>
       <Row gutter={[16, 16]} align="middle">
         <Col xs={24} md={6}>
           <Input
-            placeholder="Search Products"
+            placeholder="Search Rooms"
             prefix={<IoSearchOutline />}
             value={searchText}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchText(e.target.value)}
-            onPressEnter={handleSearch}
           />
+        </Col>
+        <Col xs={24} md={2}>
+          <Button onClick={handleSearch} block className="bg-gray-600 text-white">
+            Search
+          </Button>
         </Col>
         <Col xs={24} md={4}>
           <Input
@@ -77,6 +81,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({ onSearch, onFilter, onSor
             placeholder="Min Price"
             value={minPrice}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setMinPrice(e.target.value)}
+            className="rounded-md p-1" 
           />
         </Col>
         <Col xs={24} md={4}>
@@ -85,6 +90,7 @@ const SearchSection: React.FC<SearchSectionProps> = ({ onSearch, onFilter, onSor
             placeholder="Max Price"
             value={maxPrice}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setMaxPrice(e.target.value)}
+            className="rounded-md p-1" 
           />
         </Col>
         <Col xs={24} md={4}>
@@ -113,13 +119,14 @@ const SearchSection: React.FC<SearchSectionProps> = ({ onSearch, onFilter, onSor
             ))}
           </Select>
         </Col>
+        
         <Col xs={24} md={2}>
-          <Button type="primary" onClick={handleFilter} block>
+          <Button onClick={handleFilter} block className="bg-gray-600 text-white">
             Apply
           </Button>
         </Col>
         <Col xs={24} md={2}>
-          <Button onClick={handleClearFilters} block>
+          <Button onClick={handleClearFilters} block className="bg-gray-600 text-white">
             Clear
           </Button>
         </Col>

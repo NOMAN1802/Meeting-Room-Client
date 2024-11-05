@@ -1,5 +1,5 @@
 import Marquee from 'react-fast-marquee';
-import SectionTitle from '../SectionTitle/SectionTitle';
+import { motion } from 'framer-motion';
 
 const Team = () => {
 
@@ -35,10 +35,17 @@ const Team = () => {
         ]
     return (
         <>
-        <SectionTitle heading='Team' subHeading='Meet our co-workers'/>
-        <div className='max-w-screen-xl md:mx-auto mx-7 my-6'>
-            
-            <div className='my-10 '>
+   
+        <div className='max-w-screen-xl md:mx-auto mx-7'>
+        <motion.div
+         initial={{ opacity: 0, y: 50 }}
+         animate={{ opacity: 1, y: 0 }}
+         transition={{ duration: 0.5 }}
+        className='mx-auto text-center md:w-4/12'>
+                    <h3  className='text-3xl  text-gray-700 py-4'>Team</h3>
+                    <p  className='text-center mt-2 italic text-gray-600'>Meet our co-workers</p>
+        </motion.div>
+            <div className='my-6'>
                 <Marquee className=''>
                     {
                         members.map(company=>(

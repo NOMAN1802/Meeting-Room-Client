@@ -7,7 +7,7 @@ import RoomCard from "../RoomCard/RoomCard";
 
 const FeaturedRooms = () => {
     const { data: rooms, isLoading } = useGetRoomsQuery({});
-
+    
     if (isLoading) {
       return (
         <p className="text-3xl text-center text-yellow-500 my-2 font-bold">

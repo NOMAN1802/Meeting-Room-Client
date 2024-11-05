@@ -1,9 +1,6 @@
-import Container from '../../../components/Container/Container';
 import { useLocation } from 'react-router-dom';
 import Heading from '../../../components/Heading/Heading';
 import {  TUser } from '../../../types';
-
-import { generateBreadcrumbs } from '../../../utils/getPageTitleData';
 import { useGetAllUsersQuery } from '../../../redux/api/admin/userManagement.api';
 import ManageUserRow from './ManageUserRow';
 import PageTitle from '../../../components/PageTitle/PageTitle';
@@ -21,15 +18,8 @@ const ManageUsers = () => {
       );
     }
 
-    const breadcrumbItems = [
-        { label: "Home", path: "/dashboard" },
-        { label: "Dashboard", path: '/dashboard' },
-        { label: "Manage Users", path: 'manage-users' },
-        
-      ];
     return (
-        <Container>
-     {generateBreadcrumbs(breadcrumbItems)}
+        <>
      <PageTitle heading="Manage users" subHeading="Manage authorized users" />
       {users?.data && users?.data?.length > 0 ? (
         <div className="overflow-x-auto my-6">
@@ -71,7 +61,7 @@ const ManageUsers = () => {
           />
         </div>
       )}
-    </Container>
+    </>
     );
 };
 

@@ -5,10 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        fairyCode: ['Fira Code', 'monospace'], 
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),
-    
   ],
 }

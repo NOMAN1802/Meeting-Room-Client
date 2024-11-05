@@ -21,31 +21,26 @@ const Button: FC<TButton> = ({ label, onClick, disabled, outline, small, icon: I
         relative
         disabled:opacity-70
         disabled:cursor-not-allowed
-        hover:opacity-80
-        transition
-        px-4
+        transition-transform
+        duration-300
         w-full
+        px-6
+        py-3
         ${outline ? 'bg-white' : 'bg-gray-600'}
-        ${outline ? 'border-black' : 'border-gray-600'}
-        ${outline ? 'text-black' : 'text-white'}
- 
-        ${medium ? 'text-lg' : 'text-lg'}
-        ${medium ? 'py-2' : 'py-3'}
-        ${medium ? 'font-medium' : 'font-semibold'}
-        ${medium? 'border-[1px]' : 'border-3'}
-        
-        ${small ? 'text-sm' : 'text-md'}
-        ${small ? 'py-1' : 'py-3'}
-        ${small ? 'font-light' : 'font-semibold'}
-        ${small ? 'border-[1px]' : 'border-2'}
-    
-        ${rounded ? 'rounded-full' : 'rounded'}
+        ${outline ? 'border-gray-400' : 'border-gray-600'}
+        ${outline ? 'text-gray-700' : 'text-white'}
+        ${rounded ? 'rounded-full' : 'rounded-md'}
+        shadow-md
+        hover:shadow-xl
+        transform hover:-translate-y-1
+        ${medium ? 'text-lg font-medium' : 'text-md font-semibold'}
+        ${small ? 'text-sm py-2' : 'text-md py-3'}
       `}
     >
       {Icon && (
         <Icon
           size={24}
-          className='absolute left-4 top-3'
+          className='absolute left-4 top-1/2 transform -translate-y-1/2'
         />
       )}
       {label}

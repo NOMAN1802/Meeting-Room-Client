@@ -8,6 +8,7 @@ export type FormValues = {
     floorNo: number;
     capacity: number;
     pricePerSlot: number;
+    details: string,
     amenities: string[];
      
   }
@@ -52,7 +53,8 @@ export type TUser = {
     floorNo: number; 
     capacity: number; 
     pricePerSlot: number; 
-    amenities: string[];  
+    amenities: string[]; 
+    details: string; 
     isDeleted?: boolean; 
     isBooked?: boolean;
 }
@@ -72,6 +74,8 @@ export type TBooking =  {
   _id: string;
   room: {
     name: string;
+    pricePerSlot?: number;
+
   };
   user: {
     name: string;

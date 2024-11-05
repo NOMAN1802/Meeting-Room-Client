@@ -18,8 +18,8 @@ const MenuDropdown: React.FC = () => {
   const menu = (
     <Menu>
       <Menu.Item key="1" icon={<DashboardOutlined />}>
-        <Link to={user?.role === 'admin' ? '/dashboard' : '/dashboard/my-bookings'}>
-          {user?.role === 'admin' ? 'Dashboard' : 'My Bookings'}
+        <Link to={user?.role === 'admin' ? '/dashboard' : '/dashboard'}>
+          {user?.role === 'admin' ? 'Dashboard' : 'My Profile'}
         </Link>
       </Menu.Item>
       <Menu.Item key="2" icon={<LogoutOutlined />} onClick={handleLogout}>
